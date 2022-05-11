@@ -1,29 +1,69 @@
-NAME		=	cub3D
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/05/11 17:30:02 by lyaiche           #+#    #+#              #
+#    Updated: 2022/05/11 17:52:18 by lyaiche          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CC			=	gcc
+#=======================================#
+#[CUB3D] Fonctions partie principale#
+#=======================================#
 
-CFLAGS		=	-Wall -Wextra -Werror -g -I $(INCLUDES)
+SRCS = 	
 
-SRCS		=	srcs/main.c
+MAIN = 
 
-OBJS		=	$(SRCS:.c=.o)
+SRCS_OBJ = ${addprefix ${OBJDIR}, ${SRCS_SRC:%.c=%.o}}
 
-INCLUDES	=	./includes/
+MAIN_OBJ = ${addprefix ${OBJDIR}, ${MAIN_SRC:%.c=%.o}} ${SRCS_OBJ}
 
+#====#
+#Tags#
+#====#
 
-all:		$(NAME)
+NAME = cub3D
+CFLAGS = -Wall -Wextra -Werror ${SANIFLAG} -D BUFFER_SIZE=${BUFFER_SIZE}
+OBJDIR = ./objs/
+SRCDIR = ./main/
+SRCSDIR = ./srcs/
+INCLUDES = ./includes/
+CC = gcc
+SANIFLAG = -fsanitize=address -g
+MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
+BUFFER_SIZE = 100
 
-$(NAME):	$(OBJS)
-			$(CC) $(CFLAGS) $(OBJS) -L ./libft/ -lft -o $(NAME)
+#=========#
+#Commandes#
+#=========#	
 
-clean:
-			rm -rf $(OBJS)
-			make -C ./libft/ clean
+${OBJDIR}%.o : ${SRCDIR}%.c
+								@${CC} ${CFLAGS} -c $< -o $@ -I ${INCLUDES}
 
-fclean:		clean
-			rm -rf $(NAME)
-			make -C ./libft/ fclean
+${OBJDIR}%.o : ${SRCSDIR}%.c
+								@${CC} ${CFLAGS} -c $< -o $@ -I ${INCLUDES}
 
-re:			fclean all
+$(NAME) :						${OBJDIR}
+								make -C libft
+								@gcc ${CFLAGS} ${SRCS} -o ${NAME}
 
-.PHONY:		all clean fclean re
+${OBJDIR}:						
+								@mkdir -p ${OBJDIR}
+
+all : $(NAME)
+
+clean :
+								make clean -C libft
+								rm -rf ${OBJDIR}
+
+fclean :						clean
+								make fclean -C libft
+								rm -f ${NAME}
+
+re : 							fclean all
+
+.PHONY :						all clean fclean re
