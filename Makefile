@@ -6,7 +6,7 @@
 #    By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 17:30:02 by lyaiche           #+#    #+#              #
-#    Updated: 2022/05/12 14:31:32 by lyaiche          ###   ########.fr        #
+#    Updated: 2022/05/12 14:38:04 by mbucci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,8 @@ ${OBJDIR}%.o : ${COMMONDIR}%.c
 								@gcc ${CFLAGS} -c $< -o $@ -I ${INCLUDES}
 
 ${NAME}: 						${OBJDIR} ${MAIN_OBJ}
-								@gcc ${CFLAGS} ${MAIN_OBJ} -o ${NAME} -L ${LIBFT} -lft 
+								make -C libft
+								@gcc ${CFLAGS} ${MAIN_OBJ} -L ${LIBFT} -lft -o ${NAME}
 								@printf "\e[32;3m$@ successfully built\e[0m\n"
 
 ${OBJDIR}:						
