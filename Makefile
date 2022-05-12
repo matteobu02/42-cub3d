@@ -6,17 +6,17 @@
 #    By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 17:30:02 by lyaiche           #+#    #+#              #
-#    Updated: 2022/05/12 14:38:04 by mbucci           ###   ########.fr        #
+#    Updated: 2022/05/12 15:24:45 by mbucci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-MAIN_SRC = main.c
+MAIN_SRC	=	main.c
 
-SRCS_SRC = test.c
+SRCS_SRC	=	parsing.c	\
 				
-SRCS_OBJ = ${addprefix ${OBJDIR}, ${SRCS_SRC:%.c=%.o}}
+SRCS_OBJ	=	${addprefix ${OBJDIR}, ${SRCS_SRC:%.c=%.o}}
 
-MAIN_OBJ = ${addprefix ${OBJDIR}, ${MAIN_SRC:%.c=%.o}} ${SRCS_OBJ}
+MAIN_OBJ	=	${addprefix ${OBJDIR}, ${MAIN_SRC:%.c=%.o}} ${SRCS_OBJ}
 
 #====#
 #Tags#
@@ -44,7 +44,7 @@ ${OBJDIR}%.o : ${COMMONDIR}%.c
 								@gcc ${CFLAGS} -c $< -o $@ -I ${INCLUDES}
 
 ${NAME}: 						${OBJDIR} ${MAIN_OBJ}
-								make -C libft
+								@make -C libft
 								@gcc ${CFLAGS} ${MAIN_OBJ} -L ${LIBFT} -lft -o ${NAME}
 								@printf "\e[32;3m$@ successfully built\e[0m\n"
 
@@ -56,10 +56,12 @@ all:							${NAME}
 
 clean:
 								@rm -rf ${OBJDIR}
+								@make -C ${LIBFT} clean
 								@printf "\e[31;3mClean files\e[0m\n"
 
 fclean:							clean
 								@rm -f ${NAME}
+								@make -C ${LIBFT} fclean
 								@printf "\e[31;3mClean exec\e[0m\n"
 
 re:								fclean all

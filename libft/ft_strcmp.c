@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/12 14:27:28 by mbucci           ###   ########.fr       */
+/*   Created: 2022/05/12 14:11:01 by mbucci            #+#    #+#             */
+/*   Updated: 2022/05/12 14:43:09 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void	close_error(char *msg)
+int	ft_strcmp(char const *s1, char const *s2)
 {
-	ft_putendl_fd(msg, STDERR_FILENO);
-	exit(EXIT_FAILURE);
-}
+	int	i;
 
-int	main(int ac, char **av)
-{
-	if (ac != 2)
-		close_error("Error\nNeed exactly one '.cub' parameter");
-	int fd = check_arg(av[1]);
-	(void)fd;
-	return (0);
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] && s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }

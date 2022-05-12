@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/12 14:27:28 by mbucci           ###   ########.fr       */
+/*   Created: 2022/05/12 13:48:48 by mbucci            #+#    #+#             */
+/*   Updated: 2022/05/12 14:58:37 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	close_error(char *msg)
+int	check_arg(char *path)
 {
-	ft_putendl_fd(msg, STDERR_FILENO);
-	exit(EXIT_FAILURE);
-}
+	int	fd;
 
-int	main(int ac, char **av)
-{
-	if (ac != 2)
-		close_error("Error\nNeed exactly one '.cub' parameter");
-	int fd = check_arg(av[1]);
-	(void)fd;
-	return (0);
+	if ((ft_strlen(path) < 5) || !ft_strrstr(path, ".cub"))
+		close_error("Error\nargument is not a '. cub' file");
+	fd = open(path, O_RDONLY);
+	if (fd < 1 || read(fd, NULL, 0) < 0)
+		close_error("Error\nfile can't be opened");
+	return (fd);
 }

@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/12 14:27:28 by mbucci           ###   ########.fr       */
+/*   Created: 2022/05/10 14:11:14 by mbucci            #+#    #+#             */
+/*   Updated: 2022/05/12 14:29:46 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef LIBFT_H
+# define LIBFT_H
 
-void	close_error(char *msg)
-{
-	ft_putendl_fd(msg, STDERR_FILENO);
-	exit(EXIT_FAILURE);
-}
+# include <unistd.h>
+# include <stdlib.h>
 
-int	main(int ac, char **av)
-{
-	if (ac != 2)
-		close_error("Error\nNeed exactly one '.cub' parameter");
-	int fd = check_arg(av[1]);
-	(void)fd;
-	return (0);
-}
+void	ft_putendl_fd(char const *str, int const fd);
+int		ft_strcmp(char const *s1, char const *s2);
+char	*ft_strrstr(char const *haystack, char const *needle);
+int		ft_strlen(char const *str);
+
+#endif

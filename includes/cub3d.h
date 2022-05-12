@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/12 14:27:28 by mbucci           ###   ########.fr       */
+/*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
+/*   Updated: 2022/05/12 14:27:46 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#ifndef CUB3D_H
+# define CUB3D_H
 
-void	close_error(char *msg)
-{
-	ft_putendl_fd(msg, STDERR_FILENO);
-	exit(EXIT_FAILURE);
-}
+#include "libft.h"
+#include <fcntl.h>
 
-int	main(int ac, char **av)
+typedef struct s_map
 {
-	if (ac != 2)
-		close_error("Error\nNeed exactly one '.cub' parameter");
-	int fd = check_arg(av[1]);
-	(void)fd;
-	return (0);
-}
+	int	**map;
+	
+}	t_map;
+
+/** PARSING.C **/
+
+void	close_error(char *msg);
+int		check_arg(char *path);
+
+#endif
