@@ -6,18 +6,14 @@
 #    By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 17:30:02 by lyaiche           #+#    #+#              #
-#    Updated: 2022/05/11 17:52:18 by lyaiche          ###   ########.fr        #
+#    Updated: 2022/05/12 14:31:32 by lyaiche          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#=======================================#
-#[CUB3D] Fonctions partie principale#
-#=======================================#
+MAIN_SRC = main.c
 
-SRCS = 	
-
-MAIN = 
-
+SRCS_SRC = test.c
+				
 SRCS_OBJ = ${addprefix ${OBJDIR}, ${SRCS_SRC:%.c=%.o}}
 
 MAIN_OBJ = ${addprefix ${OBJDIR}, ${MAIN_SRC:%.c=%.o}} ${SRCS_OBJ}
@@ -26,44 +22,45 @@ MAIN_OBJ = ${addprefix ${OBJDIR}, ${MAIN_SRC:%.c=%.o}} ${SRCS_OBJ}
 #Tags#
 #====#
 
-NAME = cub3D
-CFLAGS = -Wall -Wextra -Werror ${SANIFLAG} -D BUFFER_SIZE=${BUFFER_SIZE}
 OBJDIR = ./objs/
 SRCDIR = ./main/
-SRCSDIR = ./srcs/
+COMMONDIR = ./srcs/
 INCLUDES = ./includes/
-CC = gcc
+LIBFT = ./libft/
+NAME = cub3d
+CFLAGS = -Wall -Wextra -Werror ${SANIFLAG}
 SANIFLAG = -fsanitize=address -g
-MLXFLAGS = -lmlx -framework OpenGL -framework AppKit
-BUFFER_SIZE = 100
 
 #=========#
 #Commandes#
-#=========#	
+#=========#					
 
 ${OBJDIR}%.o : ${SRCDIR}%.c
-								@${CC} ${CFLAGS} -c $< -o $@ -I ${INCLUDES}
+								@gcc ${CFLAGS} -c $< -o $@ -I ${INCLUDES}
+${OBJDIR}%.o : ${CHECKDIR}%.c
+								@gcc ${CFLAGS} -c $< -o $@ -I ${INCLUDES}
 
-${OBJDIR}%.o : ${SRCSDIR}%.c
-								@${CC} ${CFLAGS} -c $< -o $@ -I ${INCLUDES}
+${OBJDIR}%.o : ${COMMONDIR}%.c
+								@gcc ${CFLAGS} -c $< -o $@ -I ${INCLUDES}
 
-$(NAME) :						${OBJDIR}
-								make -C libft
-								@gcc ${CFLAGS} ${SRCS} -o ${NAME}
+${NAME}: 						${OBJDIR} ${MAIN_OBJ}
+								@gcc ${CFLAGS} ${MAIN_OBJ} -o ${NAME} -L ${LIBFT} -lft 
+								@printf "\e[32;3m$@ successfully built\e[0m\n"
 
 ${OBJDIR}:						
 								@mkdir -p ${OBJDIR}
 
-all : $(NAME)
+all:							${NAME}
+								
 
-clean :
-								make clean -C libft
-								rm -rf ${OBJDIR}
+clean:
+								@rm -rf ${OBJDIR}
+								@printf "\e[31;3mClean files\e[0m\n"
 
-fclean :						clean
-								make fclean -C libft
-								rm -f ${NAME}
+fclean:							clean
+								@rm -f ${NAME}
+								@printf "\e[31;3mClean exec\e[0m\n"
 
-re : 							fclean all
+re:								fclean all
 
-.PHONY :						all clean fclean re
+.PHONY:							all clean fclean re
