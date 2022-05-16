@@ -6,27 +6,34 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/12 17:36:56 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/13 16:57:26 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	close_error(char *msg)
+void	close_error(char const *msg, t_main *ptr)
 {
+	if (ptr)
+	{
+		if (ptr->map)
+			ptr->map = free_map(ptr->map);
+	}
 	ft_putendl_fd(msg, STDERR_FILENO);
 	exit(EXIT_FAILURE);
 }
 
 int	main(int ac, char **av)
 {
+	t_main	data;
+
 	// Check number of arguments
 	if (ac != 2)
-		close_error("Error\nNeed exactly one '.cub' parameter");
+		close_error("Error\nNeed exactly one '.cub' parameter", NULL);
 	// Check file name and accessibility
-	int fd = check_arg(av[1]);
+	data.map = (t_map *)malloc(sizeof(t_map));
+	get_file_size(basic_check_arg(av[1]), &data);
 	// Check infos and map
 	// Build main struct
-	(void)fd;
 	return (0);
 }

@@ -6,13 +6,14 @@
 #    By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 17:30:02 by lyaiche           #+#    #+#              #
-#    Updated: 2022/05/12 15:24:45 by mbucci           ###   ########.fr        #
+#    Updated: 2022/05/16 13:19:52 by mbucci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 MAIN_SRC	=	main.c
 
 SRCS_SRC	=	parsing.c	\
+				free.c
 				
 SRCS_OBJ	=	${addprefix ${OBJDIR}, ${SRCS_SRC:%.c=%.o}}
 
@@ -29,7 +30,7 @@ INCLUDES = ./includes/
 LIBFT = ./libft/
 NAME = cub3d
 CFLAGS = -Wall -Wextra -Werror ${SANIFLAG}
-SANIFLAG = -fsanitize=address -g
+SANIFLAG = -g -fsanitize=address
 
 #=========#
 #Commandes#

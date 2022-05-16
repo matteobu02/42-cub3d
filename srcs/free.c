@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 14:16:41 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/13 15:34:28 by mbucci           ###   ########.fr       */
+/*   Created: 2022/05/13 16:12:08 by mbucci            #+#    #+#             */
+/*   Updated: 2022/05/13 16:16:11 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-int	ft_strlen(char const *str)
+void	*free_map(t_map *ptr)
 {
-	size_t	count;
-
-	count = 0;
-	while (str && str[count])
-		count++;
-	return (count);
+	if (ptr->map)
+		;
+	if (ptr->no_path)
+		free(ptr->no_path);
+	if (ptr->so_path)
+		free(ptr->so_path);
+	if (ptr->we_path)
+		free(ptr->we_path);
+	if (ptr->ea_path)
+		free(ptr->ea_path);
+	free(ptr);
+	return (NULL);
 }

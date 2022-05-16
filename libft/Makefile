@@ -6,10 +6,17 @@ CC			=	gcc
 
 CFLAGS		=	-Wall -Wextra -Werror -I $(INCLUDES)
 
-SRCS		=	ft_putendl_fd.c	\
+SRCS		=	ft_free_tab.c	\
+				ft_memmove.c	\
+				ft_putendl_fd.c	\
+				ft_strchr.c		\
 				ft_strcmp.c		\
+				ft_strdup.c		\
+				ft_strjoin.c	\
 				ft_strlen.c		\
-				ft_strrstr.c
+				ft_strnstr.c	\
+				ft_strrstr.c	\
+				get_next_line.c
 
 OBJS		=	$(SRCS:.c=.o)
 

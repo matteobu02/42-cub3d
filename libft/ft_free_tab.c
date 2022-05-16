@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_free_tab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/10 14:16:41 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/13 15:34:28 by mbucci           ###   ########.fr       */
+/*   Created: 2022/05/13 14:59:55 by mbucci            #+#    #+#             */
+/*   Updated: 2022/05/13 15:02:54 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strlen(char const *str)
+void	*ft_free_tab(void **tab)
 {
-	size_t	count;
+	int	i;
 
-	count = 0;
-	while (str && str[count])
-		count++;
-	return (count);
+	i = -1;
+	if (tab)
+	{
+		while (tab[++i])
+		{
+			free(tab[i]);
+			tab[i] = NULL;
+		}
+		free(tab);
+	}
+	return (NULL);
 }
