@@ -6,7 +6,8 @@ CC			=	gcc
 
 CFLAGS		=	-Wall -Wextra -Werror -I $(INCLUDES)
 
-SRCS		=	ft_free_tab.c	\
+SRCS		=	ft_atoi.c		\
+				ft_free_tab.c	\
 				ft_memmove.c	\
 				ft_putendl_fd.c	\
 				ft_strchr.c		\

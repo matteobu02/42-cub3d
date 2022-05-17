@@ -6,16 +6,20 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:11:14 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/16 13:16:37 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/17 16:34:09 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# define INT_MAX	2147483647
+# define INT_MIN	-2147483648
+
 # include <unistd.h>
 # include <stdlib.h>
 
+int		ft_atoi(char const *str);
 void	*ft_free_tab(void **tab);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	ft_putendl_fd(char const *str, int const fd);
