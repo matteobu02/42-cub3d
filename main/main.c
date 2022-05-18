@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/18 17:07:19 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/19 00:25:51 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int ac, char **av)
 	// Check file name and accessibility + get file size
 	basic_check_arg(av[1], &data);
 	get_map_info(av[1], &data);
+	deep_check_map(data.raw_map, &data);
 	// Check infos and map
 	// Build main struct
 	close_program(NULL, &data);
