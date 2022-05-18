@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:48 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/18 17:05:56 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/18 18:31:16 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int	get_rgb(char *str, t_main *data)
 	while (++sets < 3)
 	{
 		tmp[sets] = ft_atoi(str);
+		if (tmp[sets] < 0 || tmp[sets] > 255)
+			close_program("Error\nInvalid RGB data", data);
 		while (str && *str && ft_isdigit(*str))
 			str++;
 		if (*str == ',')
