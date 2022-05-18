@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 16:19:41 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/18 15:03:25 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/18 16:38:58 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,14 @@ int	ft_atoi(const char *str)
 	unsigned long int	n;
 
 	i = 0;
-	while (ft_isdigit(str[i]))
+	while (ft_isspace(str[i]))
 		i++;
 	s = 1;
 	if (str[i] == '+' || str[i] == '-')
 		if (str[i++] == '-')
 			s = -1;
-		i++;
 	n = 0;
-	while (str[i] > 47 && str[i] < 58)
+	while (ft_isdigit(str[i]))
 	{
 		n = n * 10 + (str[i] - 48);
 		if (n > 2147483647 && s == 1)

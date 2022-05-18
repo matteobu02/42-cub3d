@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:48 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/18 15:27:16 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/18 17:03:20 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,19 @@ char	*retrieve_info(char **tab, char *target, t_main *data)
 			if (!ft_strcmp(target, "F") || !ft_strcmp(target, "C"))
 			{
 				tmp = tab[i];
-				while (tab[i] && !ft_isdigit(*tmp))
+				while (tmp && !ft_isdigit(*tmp))
+				{
+					if (!ft_isspace(*tmp) && !ft_isdigit(*tmp)
+						&& *tmp != *target)
+						close_program("Error\nIvalid data", data);
 					tmp++;
-				return (tab[i]);
+				}
+				return (tmp);
 			}
-			else
-				return (ft_strdup(ft_strchr(tab[i], '.')));
+			return (ft_strdup(ft_strchr(tab[i], '.')));
 		}
 	}
-	close_program("Error\nA texture couldn't be found", data);
+	close_program("Error\nData missing or invalid in file", data);
 	return (NULL);
 }
 
@@ -97,14 +101,13 @@ int	get_rgb(char *str, t_main *data)
 	while (++sets < 3)
 	{
 		tmp[sets] = ft_atoi(str);
-		while (str && *str && !ft_isdigit(*str))
+		while (str && *str && ft_isdigit(*str))
 			str++;
 		if (*str == ',')
 		{
 			str++;
 			if (!ft_isdigit(*str) && !ft_isspace(*str))
 				close_program("Error\nFile data is invalid", data);
-			continue ;
 		}
 	}
 	ret = tmp[0];

@@ -4,7 +4,7 @@ AR			=	ar -rc
 
 CC			=	gcc
 
-CFLAGS		=	-Wall -Wextra -Werror -I $(INCLUDES)
+CFLAGS		=	-Wall -Wextra -Werror -g -I $(INCLUDES)
 
 SRCS		=	ft_atoi.c		\
 				ft_free_str.c	\

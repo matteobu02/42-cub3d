@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:11:14 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/18 15:07:57 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/18 16:45:34 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 /** GET_NEXT_LINE  **/
 # define BUFFER_SIZE	100
+
 char	*get_next_line(int fd);
 
 #endif
