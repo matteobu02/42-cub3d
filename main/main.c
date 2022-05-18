@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/18 16:49:15 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/18 17:07:19 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	close_program(char const *msg, t_main *ptr)
 	if (msg)
 	{
 		ft_putendl_fd(msg, STDERR_FILENO);
-		system("leaks cub3d");
+		//system("leaks cub3d");
 		exit(EXIT_FAILURE);
 	}
 	return ;
@@ -59,6 +59,6 @@ int	main(int ac, char **av)
 	// Check infos and map
 	// Build main struct
 	close_program(NULL, &data);
-	system("leaks cub3d");
+	//system("leaks cub3d");
 	return (0);
 }
