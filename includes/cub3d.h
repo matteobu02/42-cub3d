@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/18 15:27:37 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/18 23:40:47 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ typedef struct s_map
 	char	*ea_path;
 	int		floor;
 	int		ceiling;
+	int		start_posx;
+	int		start_posy;
+	char	orientation;
 }	t_map;
 
 typedef struct s_main

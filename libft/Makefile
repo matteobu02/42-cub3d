@@ -10,6 +10,7 @@ SRCS		=	ft_atoi.c		\
 				ft_free_str.c	\
 				ft_free_tab.c	\
 				ft_isdigit.c	\
+				ft_isfull.c		\
 				ft_isspace.c	\
 				ft_memmove.c	\
 				ft_print_tab.c	\

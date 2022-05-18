@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/13 12:22:09 by mbucci            #+#    #+#             */
+/*   Created: 2022/05/18 21:38:12 by mbucci            #+#    #+#             */
 /*   Updated: 2022/05/18 23:40:47 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "cub3d.h"
 
-char	*ft_strnstr(char const *haystack, char const *needle, size_t len)
+void	deep_check_map(char **tab, t_main *data)
 {
-	size_t	i;
-	size_t	j;
-	size_t	needle_len;
+	char const	*trgts[6] = {"NO", "SO", "WE", "EA", "C", "F"};
+	int			i;
+	int			j;
+	int			x;
+	int			count;
 
-	if (!*needle)
-		return ((char *)haystack);
-	if (!haystack || len < 1)
-		return (NULL);
 	i = -1;
-	needle_len = ft_strlen(needle);
-	while (haystack[++i] && i < len)
+	while (tab[++i])
 	{
-		j = 0;
-		if (haystack[i] != needle[j])
-			continue ;
-		while (haystack[i + j] == needle[j] && haystack[i + j] && i + j < len)
-			if (j++ == needle_len - 1)
-				return ((char *)&haystack[i]);
+		x = -1;
+		while (++x < 6)
+			if (ft_strnstr(tab[i], trgts[x], ft_strlen(trgts[x])))
+				break ;
+		if (ft_isfull(tab[i], '1'))
+			break ;
+		if (x == 6 && (!ft_isspace(*tab[i]) || *tab[i] != '\n'))
+		
+		j = i;
+		count = 0;
+		while (tab[++j])
+			if (ft_strnstr(tab[i], trgts[x], ft_strlen(trgts[x])))
 	}
-	return (NULL);
 }
