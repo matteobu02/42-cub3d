@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:38:12 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/18 23:40:47 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/19 01:18:21 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	deep_check_map(char **tab, t_main *data)
 	int			i;
 	int			j;
 	int			x;
-	int			count;
 
 	i = -1;
 	while (tab[++i])
@@ -29,11 +28,13 @@ void	deep_check_map(char **tab, t_main *data)
 				break ;
 		if (ft_isfull(tab[i], '1'))
 			break ;
-		if (x == 6 && (!ft_isspace(*tab[i]) || *tab[i] != '\n'))
-		
+
+		if (x == 6 && (!ft_isspace(*tab[i]) && *tab[i] != '\n'))
+			close_program("Error\nInvalid data", data);
 		j = i;
-		count = 0;
-		while (tab[++j])
-			if (ft_strnstr(tab[i], trgts[x], ft_strlen(trgts[x])))
+		while (tab[++j] && !ft_isfull(tab[j], '1'))
+			if (ft_strnstr(tab[j], trgts[x], ft_strlen(trgts[x])))
+				close_program("Error\nMultiple entries for same field", data);
 	}
+	return ;
 }
