@@ -6,7 +6,7 @@
 #    By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 17:30:02 by lyaiche           #+#    #+#              #
-#    Updated: 2022/05/16 13:19:52 by mbucci           ###   ########.fr        #
+#    Updated: 2022/05/18 15:43:13 by mbucci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,12 +29,14 @@ COMMONDIR = ./srcs/
 INCLUDES = ./includes/
 LIBFT = ./libft/
 NAME = cub3d
-CFLAGS = -Wall -Wextra -Werror ${SANIFLAG}
+CFLAGS = -Wall -Wextra -Werror #${SANIFLAG}
 SANIFLAG = -g -fsanitize=address
 
 #=========#
 #Commandes#
 #=========#					
+
+all:							${NAME}
 
 ${OBJDIR}%.o : ${SRCDIR}%.c
 								@gcc ${CFLAGS} -c $< -o $@ -I ${INCLUDES}
@@ -51,9 +53,6 @@ ${NAME}: 						${OBJDIR} ${MAIN_OBJ}
 
 ${OBJDIR}:						
 								@mkdir -p ${OBJDIR}
-
-all:							${NAME}
-								
 
 clean:
 								@rm -rf ${OBJDIR}

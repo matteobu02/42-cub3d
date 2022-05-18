@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/17 17:00:08 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/18 15:27:37 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "libft.h"
 # include <mlx.h>
 # include <fcntl.h>
+# include <stdio.h>
 
 typedef struct s_map
 {
@@ -44,7 +45,7 @@ char	*retrieve_info(char **tab, char *target, t_main *data);
 void	get_info(t_main *data);
 
 /** FREE.C  **/
-void	close_error(char const *msg, t_main *ptr);
+void	close_program(char const *msg, t_main *ptr);
 void	*free_map(t_map *ptr);
 
 #endif

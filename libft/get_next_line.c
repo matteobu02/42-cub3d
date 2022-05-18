@@ -6,91 +6,77 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:05:15 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/16 13:18:36 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/18 13:58:31 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_set_save(char *save, char *text)
+static int	find_nl(char *s)
 {
-	if (save)
+	int	count;
+
+	if (!s)
+		return (-1);
+	count = 0;
+	while (*s)
 	{
-		free(save);
-		save = NULL;
+		if (*s++ == '\n')
+			return (count);
+		count++;
 	}
-	save = ft_strdup(text);
-	if (text)
-	{
-		free(text);
-		text = NULL;
-	}
+	return (-1);
 }
 
-static int	save_read_fd(char *save, int fd)
+static char	*get_final_buffer(char *s)
 {
-	char	buff[BUFFER_SIZE + 1];
-	int		bytes_read;
-	char	*swap;
+	char	*str;
+	size_t	i;
+	size_t	j;
 
-	bytes_read = read(fd, buff, BUFFER_SIZE);
-	if (bytes_read)
+	i = 0;
+	j = 0;
+	while (s && s[i] && s[i] != '\n')
+		i++;
+	if (!s[i])
 	{
-		buff[bytes_read] = '\0';
-		swap = ft_strjoin(save, buff);
-		ft_set_save(save, swap);
+		free(s);
+		return (NULL);
 	}
-	return (bytes_read);
-}
-
-static char	*get_line(char *save, char *nlptr)
-{
-	char	*tmp;
-	char	*line;
-
-	if (!nlptr)
-	{
-		line = ft_strdup(save);
-		if (save)
-			free(save);
-		save = NULL;
-		return (line);
-	}
-	*nlptr = '\0';
-	tmp = ft_strdup(save);
-	line = ft_strjoin(tmp, "\n");
-	if (tmp)
-		free(tmp);
-	nlptr = ft_strdup(nlptr + 1);
-	ft_set_save(save, nlptr);
-	return (line);
+	str = (char *)malloc(ft_strlen(s) - (i - 1));
+	if (!str)
+		return (ft_free_str(s));
+	i++;
+	while (s[i])
+		str[j++] = s[i++];
+	str[j] = '\0';
+	free(s);
+	return (str);
 }
 
 char	*get_next_line(int fd)
 {
-	char			testbuff;
-	static char		*save;
-	int				bytes_saved;
-	char			*nlptr;
+	static char	*text;
+	char		buff[BUFFER_SIZE + 1];
+	char		*line;
+	int			read_val;
+	int			len_line;
 
-	if (fd < 0 || (read(fd, &testbuff, 0) < 0 && !ft_strlen(save)))
+	if (fd < 0 || fd > FOPEN_MAX || (read(fd, NULL, 0) < 0) || BUFFER_SIZE < 1)
 		return (NULL);
-	if (!save)
-		save = ft_strdup("");
-	nlptr = ft_strchr(save, '\n');
-	while (!nlptr)
+	read_val = 1;
+	while (read_val > 0 && find_nl(text) == -1)
 	{
-		bytes_saved = save_read_fd(save, fd);
-		if (!bytes_saved)
-			break ;
-		nlptr = ft_strchr(save, '\n');
+		read_val = read(fd, buff, BUFFER_SIZE);
+		buff[read_val] = '\0';
+		text = ft_strjoin(text, buff);
+		if (!text)
+			return (NULL);
 	}
-	if (ft_strlen(save))
-		return (get_line(save, nlptr));
-	if (save)
-	{
-		free(save);
-		save = NULL;
-	}
-	return (NULL);
+	len_line = find_nl(text) + 1;
+	if (!len_line)
+		len_line = ft_strlen(text);
+	line = ft_substr(text, 0, len_line);
+	text = get_final_buffer(text);
+	return (line);
 }

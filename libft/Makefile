@@ -7,8 +7,12 @@ CC			=	gcc
 CFLAGS		=	-Wall -Wextra -Werror -I $(INCLUDES)
 
 SRCS		=	ft_atoi.c		\
+				ft_free_str.c	\
 				ft_free_tab.c	\
+				ft_isdigit.c	\
+				ft_isspace.c	\
 				ft_memmove.c	\
+				ft_print_tab.c	\
 				ft_putendl_fd.c	\
 				ft_strchr.c		\
 				ft_strcmp.c		\
@@ -17,6 +21,7 @@ SRCS		=	ft_atoi.c		\
 				ft_strlen.c		\
 				ft_strnstr.c	\
 				ft_strrstr.c	\
+				ft_substr.c		\
 				get_next_line.c
 
 OBJS		=	$(SRCS:.c=.o)

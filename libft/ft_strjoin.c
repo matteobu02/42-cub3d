@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 11:17:53 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/16 11:27:36 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/18 13:58:02 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,28 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*ret;
-	size_t	len1;
-	size_t	len2;
+	int		i;
+	int		j;
+	int		len;
+	char	*join;
 
-	if (!s1 && !s2)
-		return (ft_strdup(""));
-	if (!s1 && s2)
-		return (ft_strdup(s2));
-	if (s1 && !s2)
-		return (ft_strdup(s1));
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	ret = (char *)malloc(len1 + len2 + 1);
-	if (!ret)
-		return (NULL);
-	ft_memmove(ret, s1, len1);
-	ft_memmove(ret, s2, len2);
-	ret[len1 + len2] = 0;
-	return (ret);
+	if (!s1)
+		len = ft_strlen(s2);
+	else
+		len = ft_strlen(s1) + ft_strlen(s2);
+	i = 0;
+	j = 0;
+	join = (char *)malloc(len + 1);
+	if (!join)
+		return (ft_free_str((char *)s1));
+	while (s1 && s1[i])
+	{
+		join[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+		join[i++] = s2[j++];
+	join[i] = '\0';
+	free((char *)s1);
+	return (join);
 }

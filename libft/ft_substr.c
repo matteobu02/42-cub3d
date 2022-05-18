@@ -1,40 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 16:19:41 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/18 15:03:25 by mbucci           ###   ########.fr       */
+/*   Created: 2022/05/18 13:50:42 by mbucci            #+#    #+#             */
+/*   Updated: 2022/05/18 13:51:09 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	int					i;
-	int					s;
-	unsigned long int	n;
+	char	*s2;
+	size_t	slen;
+	size_t	i;
 
+	if (!s || !*s)
+		return (NULL);
+	slen = ft_strlen(s);
+	if (slen >= len)
+		s2 = (char *)malloc(len + 1);
+	else
+		s2 = (char *)malloc(slen);
+	if (!s2)
+		return (NULL);
 	i = 0;
-	while (ft_isdigit(str[i]))
-		i++;
-	s = 1;
-	if (str[i] == '+' || str[i] == '-')
-		if (str[i++] == '-')
-			s = -1;
-		i++;
-	n = 0;
-	while (str[i] > 47 && str[i] < 58)
+	if (start <= (unsigned int)slen)
 	{
-		n = n * 10 + (str[i] - 48);
-		if (n > 2147483647 && s == 1)
-			return (-1);
-		if (n > 2147483648 && s == -1)
-			return (0);
-		i++;
+		while (s[start + i] != '\0' && i < len)
+		{
+			s2[i] = s[start + i];
+			i++;
+		}
 	}
-	return (n * s);
+	s2[i] = '\0';
+	return (s2);
 }
