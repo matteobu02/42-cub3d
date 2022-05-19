@@ -6,13 +6,14 @@
 #    By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 17:30:02 by lyaiche           #+#    #+#              #
-#    Updated: 2022/05/18 15:43:13 by mbucci           ###   ########.fr        #
+#    Updated: 2022/05/19 13:01:07 by mbucci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 MAIN_SRC	=	main.c
 
-SRCS_SRC	=	parsing.c	\
+SRCS_SRC	=	parsing.c		\
+				parsing_map.c	\
 				free.c
 				
 SRCS_OBJ	=	${addprefix ${OBJDIR}, ${SRCS_SRC:%.c=%.o}}

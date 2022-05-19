@@ -5,16 +5,48 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
+/*   Updated: 2022/05/19 17:56:19 by mbucci           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_map.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 21:38:12 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/19 01:18:21 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/19 17:40:15 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+int	check_line(char const *str, int c)
+{
+	int	i;
+
+	if (!str)
+		return (0);
+	i = -1;
+	while (str[++i] && ft_isspace(str[i]))
+		;
+	if (!str[i])
+		return (0);
+	--i;
+	while (str[++i])
+		if (str[i] != c && str[i] != '\n')
+			return (0);
+	if (i == ft_strlen(str))
+		return (1);
+	return (0);
+}
+
 void	deep_check_map(char **tab, t_main *data)
 {
-	char const	*trgts[6] = {"NO", "SO", "WE", "EA", "C", "F"};
+	char const	*trgts[6] = {"NO", "SO", "WE", "EA", "F", "C"};
 	int			i;
 	int			j;
 	int			x;
@@ -22,19 +54,18 @@ void	deep_check_map(char **tab, t_main *data)
 	i = -1;
 	while (tab[++i])
 	{
+		if (check_line(tab[i], '1'))
+			break ;
 		x = -1;
 		while (++x < 6)
 			if (ft_strnstr(tab[i], trgts[x], ft_strlen(trgts[x])))
 				break ;
-		if (ft_isfull(tab[i], '1'))
-			break ;
-
-		if (x == 6 && (!ft_isspace(*tab[i]) && *tab[i] != '\n'))
+		if (x == 6 && *tab[i] != '\n' && !ft_isspace(*tab[i]))
 			close_program("Error\nInvalid data", data);
 		j = i;
-		while (tab[++j] && !ft_isfull(tab[j], '1'))
+		while (tab[++j] && x != 6)
 			if (ft_strnstr(tab[j], trgts[x], ft_strlen(trgts[x])))
-				close_program("Error\nMultiple entries for same field", data);
+				close_program("Error\nDuplicated entry for the same field", data);
 	}
 	return ;
 }
