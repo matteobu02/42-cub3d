@@ -6,19 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/19 17:56:19 by mbucci           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   parsing_map.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/18 21:38:12 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/19 17:40:15 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/20 13:21:39 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +32,20 @@ int	check_line(char const *str, int c)
 	return (0);
 }
 
+void	check_valid_line(char *str, t_main *data)
+{
+	int	i;
+
+	i = 1;
+	while (str[++i] && str[i] != '.')
+	{
+		if (!ft_isspace(str[i]))
+			close_program("Error\nInvalid data between identifier and path",
+				data);
+	}
+	return ;
+}
+
 void	deep_check_map(char **tab, t_main *data)
 {
 	char const	*trgts[6] = {"NO", "SO", "WE", "EA", "F", "C"};
@@ -60,12 +62,14 @@ void	deep_check_map(char **tab, t_main *data)
 		while (++x < 6)
 			if (ft_strnstr(tab[i], trgts[x], ft_strlen(trgts[x])))
 				break ;
-		if (x == 6 && *tab[i] != '\n' && !ft_isspace(*tab[i]))
+		if (x < 4)
+			check_valid_line(tab[i], data);
+		if (x == 6 && *tab[i] != '\n' && !check_line(tab[i]++, 32))
 			close_program("Error\nInvalid data", data);
 		j = i;
 		while (tab[++j] && x != 6)
 			if (ft_strnstr(tab[j], trgts[x], ft_strlen(trgts[x])))
-				close_program("Error\nDuplicated entry for the same field", data);
+				close_program("Error\nMultiple entries for given field", data);
 	}
 	return ;
 }

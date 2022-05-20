@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:48 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/18 23:40:47 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/20 12:32:41 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*retrieve_info(char **tab, char *target, t_main *data)
 			return (ft_strdup(ft_strchr(tab[i], '.')));
 		}
 	}
-	close_program("Error\nData missing or invalid in file", data);
+	close_program("Error\nMissing or invalid data in file", data);
 	return (NULL);
 }
 
