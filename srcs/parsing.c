@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:48 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/20 12:32:41 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/20 17:26:57 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,43 +91,42 @@ char	*retrieve_info(char **tab, char *target, t_main *data)
 
 int	get_rgb(char *str, t_main *data)
 {
-	int	ret;
-	int	sets;
-	int	tmp[3];
+	int	nums[5];
 
 	if (!str)
-		close_program("Error\nFile data is invalid", data);
-	sets = -1;
-	while (++sets < 3)
+		close_program("Error\nInvalid data", data);
+	nums[3] = -1;
+	while (++nums[3] < 3)
 	{
-		tmp[sets] = ft_atoi(str);
-		if (tmp[sets] < 0 || tmp[sets] > 255)
+		nums[nums[3]] = ft_atoi(str);
+		if (nums[nums[3]] < 0 || nums[nums[3]] > 255)
 			close_program("Error\nInvalid RGB data", data);
-		while (str && *str && ft_isdigit(*str))
+		while (str && *str && (ft_isdigit(*str) || ft_isspace(*str)))
 			str++;
-		if (*str == ',')
-		{
+		if (*str && *str != ',' && *str != '\n')
+			close_program("Error\nInvalid RGB data", data);
+		else if (*str)
 			str++;
-			if (!ft_isdigit(*str) && !ft_isspace(*str))
-				close_program("Error\nFile data is invalid", data);
-		}
+		while (*str && ft_isspace(*str))
+			str++;
+		if (*str && !ft_isdigit(*str))
+			close_program("Error\nInvalid RGB data", data);
 	}
-	ret = tmp[0];
-	ret = (ret << 8) + tmp[1];
-	ret = (ret << 8) + tmp[2];
-	return (ret);
+	nums[4] = nums[0];
+	nums[4] = (nums[4] << 8) + nums[1];
+	nums[4] = (nums[4] << 8) + nums[2];
+	return (nums[4]);
 }
 
 void	get_info(t_main *data)
 {
-	data->map->no_path = retrieve_info(data->raw_map, "NO", data);
-	data->map->so_path = retrieve_info(data->raw_map, "SO", data);
-	data->map->we_path = retrieve_info(data->raw_map, "WE", data);
-	data->map->ea_path = retrieve_info(data->raw_map, "EA", data);
-	if (!data->map->no_path || !data->map->so_path || !data->map->we_path
-		|| !data->map->ea_path)
+	data->map->no = retrieve_info(data->raw_map, "NO", data);
+	data->map->so = retrieve_info(data->raw_map, "SO", data);
+	data->map->we = retrieve_info(data->raw_map, "WE", data);
+	data->map->ea = retrieve_info(data->raw_map, "EA", data);
+	if (!data->map->no || !data->map->so || !data->map->we || !data->map->ea)
 		close_program("Error\nMalloc failed", data);
-	data->map->floor = get_rgb(retrieve_info(data->raw_map, "F", data), data);
-	data->map->ceiling = get_rgb(retrieve_info(data->raw_map, "C", data), data);
+	data->map->f = get_rgb(retrieve_info(data->raw_map, "F", data), data);
+	data->map->c = get_rgb(retrieve_info(data->raw_map, "C", data), data);
 	return ;
 }

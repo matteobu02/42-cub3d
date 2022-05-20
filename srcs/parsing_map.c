@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/20 13:21:39 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/20 17:42:28 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,17 @@ void	check_valid_line(char *str, t_main *data)
 			close_program("Error\nInvalid data between identifier and path",
 				data);
 	}
+	--i;
+	while (str[++i] && !ft_isspace(str[i]))
+		;
+	if (str[i] != '\n' && i != ft_strlen(str))
+		close_program("Error\nInvalid data after path", data);
 	return ;
 }
 
 void	deep_check_map(char **tab, t_main *data)
 {
-	char const	*trgts[6] = {"NO", "SO", "WE", "EA", "F", "C"};
+	char const	*targets[6] = {"NO", "SO", "WE", "EA", "F", "C"};
 	int			i;
 	int			j;
 	int			x;
@@ -60,16 +65,16 @@ void	deep_check_map(char **tab, t_main *data)
 			break ;
 		x = -1;
 		while (++x < 6)
-			if (ft_strnstr(tab[i], trgts[x], ft_strlen(trgts[x])))
+			if (ft_strnstr(tab[i], targets[x], ft_strlen(targets[x])))
 				break ;
 		if (x < 4)
 			check_valid_line(tab[i], data);
-		if (x == 6 && *tab[i] != '\n' && !check_line(tab[i]++, 32))
+		if (x == 6 && *tab[i] != '\n' && !check_line(tab[i], 32))
 			close_program("Error\nInvalid data", data);
 		j = i;
 		while (tab[++j] && x != 6)
-			if (ft_strnstr(tab[j], trgts[x], ft_strlen(trgts[x])))
-				close_program("Error\nMultiple entries for given field", data);
+			if (ft_strnstr(tab[j], targets[x], ft_strlen(targets[x])))
+				close_program("Error\n2 entries for same identifier", data);
 	}
 	return ;
 }

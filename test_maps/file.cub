@@ -2,8 +2,9 @@ SO ./bucci
 WE ./luca
 NO ./matteo
 EA ./tim
+WE ./luca
 
-F 220,100,0
+F 220,100,0 
 C 225,30,0
 
         1111111111111111111111111
