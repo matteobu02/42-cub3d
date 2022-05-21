@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/20 17:28:48 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/21 15:18:23 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*retrieve_info(char **tab, char *target, t_main *data);
 void	get_info(t_main *data);
 
 /** PARSING_MAP.C  **/
-void	deep_check_map(char **tab, t_main *data);
+void	deep_check_info(char **tab, t_main *data);
 
 /** FREE.C  **/
 void	close_program(char const *msg, t_main *ptr);

@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/20 17:42:28 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/21 15:25:40 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ int	check_line(char const *str, int c)
 	if (!str)
 		return (0);
 	i = -1;
-	while (str[++i] && ft_isspace(str[i]))
-		;
-	if (!str[i])
-		return (0);
-	--i;
+	if (!ft_isspace(c))
+	{
+		while (str[++i] && ft_isspace(str[i]))
+			;
+		if (!str[i])
+			return (0);
+		--i;
+	}
 	while (str[++i])
 		if (str[i] != c && str[i] != '\n')
 			return (0);
@@ -51,7 +54,7 @@ void	check_valid_line(char *str, t_main *data)
 	return ;
 }
 
-void	deep_check_map(char **tab, t_main *data)
+void	deep_check_info(char **tab, t_main *data)
 {
 	char const	*targets[6] = {"NO", "SO", "WE", "EA", "F", "C"};
 	int			i;
@@ -78,3 +81,34 @@ void	deep_check_map(char **tab, t_main *data)
 	}
 	return ;
 }
+
+/*int		**produce_map(char **tab, int start, t_main *data)
+{
+	int	**ret;
+
+
+}
+
+void	get_map(char **tab, t_main *data)
+{
+	char const	*trgts[6] = {"NO", "SO", "WE", "EA", "F", "C"};
+	int			i;
+	int			c;
+	int			x;
+
+	i = -1;
+	c = 0;
+	while (tab[++i] && c < 6)
+	{
+		x = -1;
+		while (++x < 6 && !ft_strnstr(tab[i], trgts[x], ft_strlen(trgts[x])))
+			;
+		if (x == 6)
+			continue ;
+		else
+			c++;
+	}
+	while (tab[i] && check_line(tab[i], 32))
+		i++;
+	data->map->map = produce_map(tab, i, data);
+}*/
