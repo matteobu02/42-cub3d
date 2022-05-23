@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/23 13:12:35 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/23 14:21:51 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,19 @@ void	check_valid_line(char const *str, char const *target, t_main *data)
 		i = 1;
 	else
 		return ;
+	if (!ft_isspace(tmp[i + 1]))
+		close_program("Error\nNeed at least one space before path", data);
 	while (tmp[++i] && tmp[i] != '.')
 	{
 		if (!ft_isspace(tmp[i]))
 			close_program("Error\nInvalid data between identifier and path",
 				data);
 	}
-	--i;
-	while (tmp[++i] && !ft_isspace(tmp[i]))
-		;
-	if (tmp[i] != '\n' && i != ft_strlen(tmp))
-		close_program("Error\nInvalid data after path", data);
+	while (tmp[i] && !ft_isspace(tmp[i]))
+		i++;
+	while (tmp[++i])
+		if (!ft_isspace(tmp[i]) && tmp[i] != '\n')
+			close_program("Error\nInvalid data after path", data);
 	tmp = NULL;
 	return ;
 }

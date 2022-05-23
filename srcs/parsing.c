@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:48 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/23 12:42:56 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/23 14:23:47 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	basic_check_arg(char const *path, t_main *data)
 	return ;
 }
 
-char	*retrieve_info(char **tab, char *trgt, t_main *data)
+char	*retrieve_info(char **tab, char const *trgt, t_main *data)
 {
 	int		i;
 	char	*tmp;
@@ -65,7 +65,7 @@ char	*retrieve_info(char **tab, char *trgt, t_main *data)
 	return (NULL);
 }
 
-int	get_rgb(char *str, t_main *data)
+int	get_rgb(char const *str, t_main *data)
 {
 	int	nums[5];
 

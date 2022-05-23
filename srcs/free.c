@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:12:08 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/20 17:27:37 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/23 14:35:08 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,23 @@ void	*free_map(t_map *ptr)
 		free(ptr);
 	}
 	return (NULL);
+}
+
+void	close_program(char const *msg, t_main *ptr)
+{
+	if (ptr)
+	{
+		if (ptr->raw_map)
+			ptr->raw_map = ft_free_tab((void **)ptr->raw_map);
+		if (ptr->map)
+			ptr->map = free_map(ptr->map);
+	}
+	//system("leaks cub3d");
+	if (msg)
+	{
+		ft_putendl_fd(msg, STDERR_FILENO);
+		if (ft_strnstr(msg, "Error\n", 6))
+			exit(EXIT_FAILURE);
+	}
+	return ;
 }

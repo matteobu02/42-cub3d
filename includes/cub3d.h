@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/23 13:11:57 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/23 14:41:41 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_main
 /** PARSING.C **/
 void	basic_check_arg(char const *path, t_main *data);
 void	get_map_info(char const *path, t_main *data);
-char	*retrieve_info(char **tab, char *target, t_main *data);
+char	*retrieve_info(char **tab, char const *target, t_main *data);
 void	get_info(t_main *data);
 
 /** PARSING_MAP.C  **/
