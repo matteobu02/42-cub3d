@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/23 13:07:13 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/23 13:12:35 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_line(char const *str, int c)
 	return (0);
 }
 
-void	check_valid_line(char *str, char const *target, t_main *data)
+void	check_valid_line(char const *str, char const *target, t_main *data)
 {
 	int		i;
 	char	*tmp;
@@ -56,6 +56,7 @@ void	check_valid_line(char *str, char const *target, t_main *data)
 		;
 	if (tmp[i] != '\n' && i != ft_strlen(tmp))
 		close_program("Error\nInvalid data after path", data);
+	tmp = NULL;
 	return ;
 }
 
