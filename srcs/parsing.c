@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:48 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/20 17:26:57 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/23 12:42:56 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,7 @@ void	basic_check_arg(char const *path, t_main *data)
 	return ;
 }
 
-void	get_map_info(char const *path, t_main *data)
-{
-	int		fd;
-	int		i;
-	char	*line;
-
-	data->raw_map = (char **)malloc(sizeof(char *) * (data->map->height + 1));
-	if (!data->raw_map)
-		close_program("Error\nMalloc failed", data);
-	fd = open(path, O_RDONLY);
-	line = get_next_line(fd);
-	i = -1;
-	while (line)
-	{
-		data->raw_map[++i] = line;
-		line = get_next_line(fd);
-	}
-	data->raw_map[++i] = NULL;
-	close(fd);
-	get_info(data);
-	return ;
-}
-
-char	*retrieve_info(char **tab, char *target, t_main *data)
+char	*retrieve_info(char **tab, char *trgt, t_main *data)
 {
 	int		i;
 	char	*tmp;
@@ -68,15 +45,14 @@ char	*retrieve_info(char **tab, char *target, t_main *data)
 	i = -1;
 	while (tab[++i])
 	{
-		if (ft_strnstr(tab[i], target, ft_strlen(target)))
+		if (skip_spaces(tab[i], trgt) && !check_line(tab[i] + 2, 32))
 		{
-			if (!ft_strcmp(target, "F") || !ft_strcmp(target, "C"))
+			if (!ft_strcmp(trgt, "F") || !ft_strcmp(trgt, "C"))
 			{
 				tmp = tab[i];
 				while (tmp && !ft_isdigit(*tmp))
 				{
-					if (!ft_isspace(*tmp) && !ft_isdigit(*tmp)
-						&& *tmp != *target)
+					if (!ft_isspace(*tmp) && !ft_isdigit(*tmp) && *tmp != *trgt)
 						close_program("Error\nIvalid data", data);
 					tmp++;
 				}
@@ -128,5 +104,28 @@ void	get_info(t_main *data)
 		close_program("Error\nMalloc failed", data);
 	data->map->f = get_rgb(retrieve_info(data->raw_map, "F", data), data);
 	data->map->c = get_rgb(retrieve_info(data->raw_map, "C", data), data);
+	return ;
+}
+
+void	get_map_info(char const *path, t_main *data)
+{
+	int		fd;
+	int		i;
+	char	*line;
+
+	data->raw_map = (char **)malloc(sizeof(char *) * (data->map->height + 1));
+	if (!data->raw_map)
+		close_program("Error\nMalloc failed", data);
+	fd = open(path, O_RDONLY);
+	line = get_next_line(fd);
+	i = -1;
+	while (line)
+	{
+		data->raw_map[++i] = line;
+		line = get_next_line(fd);
+	}
+	data->raw_map[++i] = NULL;
+	close(fd);
+	get_info(data);
 	return ;
 }

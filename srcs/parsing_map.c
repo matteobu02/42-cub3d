@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/21 15:25:40 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/23 13:07:13 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,26 @@ int	check_line(char const *str, int c)
 	return (0);
 }
 
-void	check_valid_line(char *str, t_main *data)
+void	check_valid_line(char *str, char const *target, t_main *data)
 {
-	int	i;
+	int		i;
+	char	*tmp;
 
-	i = 1;
-	while (str[++i] && str[i] != '.')
+	tmp = skip_spaces(str, target);
+	if (tmp)
+		i = 1;
+	else
+		return ;
+	while (tmp[++i] && tmp[i] != '.')
 	{
-		if (!ft_isspace(str[i]))
+		if (!ft_isspace(tmp[i]))
 			close_program("Error\nInvalid data between identifier and path",
 				data);
 	}
 	--i;
-	while (str[++i] && !ft_isspace(str[i]))
+	while (tmp[++i] && !ft_isspace(tmp[i]))
 		;
-	if (str[i] != '\n' && i != ft_strlen(str))
+	if (tmp[i] != '\n' && i != ft_strlen(tmp))
 		close_program("Error\nInvalid data after path", data);
 	return ;
 }
@@ -68,15 +73,15 @@ void	deep_check_info(char **tab, t_main *data)
 			break ;
 		x = -1;
 		while (++x < 6)
-			if (ft_strnstr(tab[i], targets[x], ft_strlen(targets[x])))
+			if (skip_spaces(tab[i], targets[x]))
 				break ;
 		if (x < 4)
-			check_valid_line(tab[i], data);
+			check_valid_line(tab[i], targets[x], data);
 		if (x == 6 && *tab[i] != '\n' && !check_line(tab[i], 32))
 			close_program("Error\nInvalid data", data);
 		j = i;
 		while (tab[++j] && x != 6)
-			if (ft_strnstr(tab[j], targets[x], ft_strlen(targets[x])))
+			if (skip_spaces(tab[j], targets[x]))
 				close_program("Error\n2 entries for same identifier", data);
 	}
 	return ;
