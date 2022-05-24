@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/23 14:41:41 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/23 15:19:46 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	get_info(t_main *data);
 /** PARSING_MAP.C  **/
 int		check_line(char const *str, int c);
 void	deep_check_info(char **tab, t_main *data);
+void	get_map(char **tab, t_main *data);
 
 /** PARSING_UTILS.C  **/
 char	*skip_spaces(char const *str, char const *target);

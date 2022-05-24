@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:48 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/23 14:23:47 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/24 15:39:12 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	get_rgb(char const *str, t_main *data)
 			close_program("Error\nInvalid RGB data", data);
 		while (str && *str && (ft_isdigit(*str) || ft_isspace(*str)))
 			str++;
-		if (*str && *str != ',' && *str != '\n')
+		if ((*str && *str != ',' && *str != '\n') || (!*str && nums[3] < 3))
 			close_program("Error\nInvalid RGB data", data);
 		else if (*str)
 			str++;

@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/23 14:21:51 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/24 14:40:33 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,11 @@ void	deep_check_info(char **tab, t_main *data)
 
 /*int		**produce_map(char **tab, int start, t_main *data)
 {
-	int	**ret;
+	int		**ret;
+	char	**dup;
+}*/
 
-
-}
-
-void	get_map(char **tab, t_main *data)
+/*void	get_map(char **tab, t_main *data)
 {
 	char const	*trgts[6] = {"NO", "SO", "WE", "EA", "F", "C"};
 	int			i;
