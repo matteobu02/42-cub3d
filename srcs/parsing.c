@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:48 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/24 15:39:12 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/25 21:25:37 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,17 +76,17 @@ int	get_rgb(char const *str, t_main *data)
 	{
 		nums[nums[3]] = ft_atoi(str);
 		if (nums[nums[3]] < 0 || nums[nums[3]] > 255)
-			close_program("Error\nInvalid RGB data", data);
+			close_program("Error\nInvalid RGB data 1", data);
 		while (str && *str && (ft_isdigit(*str) || ft_isspace(*str)))
 			str++;
-		if ((*str && *str != ',' && *str != '\n') || (!*str && nums[3] < 3))
-			close_program("Error\nInvalid RGB data", data);
+		if ((*str && *str != ',' && *str != '\n') || (!*str && nums[3] < 2))
+			close_program("Error\nInvalid RGB data 2", data);
 		else if (*str)
 			str++;
 		while (*str && ft_isspace(*str))
 			str++;
 		if (*str && !ft_isdigit(*str))
-			close_program("Error\nInvalid RGB data", data);
+			close_program("Error\nInvalid RGB data 3", data);
 	}
 	nums[4] = nums[0];
 	nums[4] = (nums[4] << 8) + nums[1];
