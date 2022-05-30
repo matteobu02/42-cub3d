@@ -6,19 +6,29 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/23 15:19:46 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:20:57 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define MINLEN_ARG	5
-
 # include "libft.h"
 # include <mlx.h>
 # include <fcntl.h>
 # include <stdio.h>
+
+# define MINLEN_ARG				5
+# define INVALID_ARG_ERROR		"Error\nArgument is not a '.cub' file"
+# define FILE_ERROR				"Error\nFile can't be opened or doesn't exist"
+# define MALLOC_ERROR 			"Error\nMalloc failed"
+# define INVALID_DATA_ERROR 	"Error\nInvalid data"
+# define INVALID_RGB_ERROR 		"Error\nInvalid RGB data"
+# define DUPLICATED_ENTRY_ERROR "Error\nMultiple entries for same identifier"
+# define MISSING_DATA_ERROR		"Error\nMissing or invalid data in file"
+# define AFTER_PATH_ERROR		"Error\nInvalid data after path"
+# define NO_SPACE_PATH_ERROR	"Error\nNeed at least one space before path"
+# define IDENTIFIER_PATH_ERROR	"Error\nInvalid data between identifier and path"
 
 typedef struct s_map
 {

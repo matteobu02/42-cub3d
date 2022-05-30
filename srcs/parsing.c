@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:48 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/25 21:25:37 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:22:33 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	basic_check_arg(char const *path, t_main *data)
 	char	*line;
 
 	if ((ft_strlen(path) < MINLEN_ARG) || !ft_strrstr(path, ".cub"))
-		close_program("Error\nArgument is not a '.cub' file", data);
+		close_program(INVALID_ARG_ERROR, data);
 	fd = open(path, O_RDONLY);
 	if (fd < 1 || read(fd, NULL, 0) < 0)
-		close_program("Error\nFile can't be opened or does not exist", data);
+		close_program(FILE_ERROR, data);
 	line = get_next_line(fd);
 	i = 0;
 	while (line)
@@ -43,7 +43,7 @@ char	*retrieve_info(char **tab, char const *trgt, t_main *data)
 	char	*tmp;
 
 	i = -1;
-	while (tab[++i])
+	while (!check_line(tab[++i], '1'))
 	{
 		if (skip_spaces(tab[i], trgt) && !check_line(tab[i] + 2, 32))
 		{
@@ -53,7 +53,7 @@ char	*retrieve_info(char **tab, char const *trgt, t_main *data)
 				while (tmp && !ft_isdigit(*tmp))
 				{
 					if (!ft_isspace(*tmp) && !ft_isdigit(*tmp) && *tmp != *trgt)
-						close_program("Error\nIvalid data", data);
+						close_program(INVALID_DATA_ERROR, data);
 					tmp++;
 				}
 				return (tmp);
@@ -61,7 +61,7 @@ char	*retrieve_info(char **tab, char const *trgt, t_main *data)
 			return (ft_strdup(ft_strchr(tab[i], '.')));
 		}
 	}
-	close_program("Error\nMissing or invalid data in file", data);
+	close_program(MISSING_DATA_ERROR, data);
 	return (NULL);
 }
 
@@ -70,23 +70,23 @@ int	get_rgb(char const *str, t_main *data)
 	int	nums[5];
 
 	if (!str)
-		close_program("Error\nInvalid data", data);
+		close_program(INVALID_DATA_ERROR, data);
 	nums[3] = -1;
 	while (++nums[3] < 3)
 	{
 		nums[nums[3]] = ft_atoi(str);
 		if (nums[nums[3]] < 0 || nums[nums[3]] > 255)
-			close_program("Error\nInvalid RGB data 1", data);
+			close_program(INVALID_RGB_ERROR, data);
 		while (str && *str && (ft_isdigit(*str) || ft_isspace(*str)))
 			str++;
 		if ((*str && *str != ',' && *str != '\n') || (!*str && nums[3] < 2))
-			close_program("Error\nInvalid RGB data 2", data);
+			close_program(INVALID_RGB_ERROR, data);
 		else if (*str)
 			str++;
 		while (*str && ft_isspace(*str))
 			str++;
 		if (*str && !ft_isdigit(*str))
-			close_program("Error\nInvalid RGB data 3", data);
+			close_program(INVALID_RGB_ERROR, data);
 	}
 	nums[4] = nums[0];
 	nums[4] = (nums[4] << 8) + nums[1];
@@ -101,7 +101,7 @@ void	get_info(t_main *data)
 	data->map->we = retrieve_info(data->raw_map, "WE", data);
 	data->map->ea = retrieve_info(data->raw_map, "EA", data);
 	if (!data->map->no || !data->map->so || !data->map->we || !data->map->ea)
-		close_program("Error\nMalloc failed", data);
+		close_program(MALLOC_ERROR, data);
 	data->map->f = get_rgb(retrieve_info(data->raw_map, "F", data), data);
 	data->map->c = get_rgb(retrieve_info(data->raw_map, "C", data), data);
 	return ;
@@ -115,7 +115,7 @@ void	get_map_info(char const *path, t_main *data)
 
 	data->raw_map = (char **)malloc(sizeof(char *) * (data->map->height + 1));
 	if (!data->raw_map)
-		close_program("Error\nMalloc failed", data);
+		close_program(MALLOC_ERROR, data);
 	fd = open(path, O_RDONLY);
 	line = get_next_line(fd);
 	i = -1;

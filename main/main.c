@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/24 14:41:45 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/30 14:45:59 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_map	*init_map_struct(void)
 	ret->so = NULL;
 	ret->we = NULL;
 	ret->ea = NULL;
+	ret->c = -1;
+	ret->f = -1;
 	return (ret);
 }
 

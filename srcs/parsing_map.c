@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/25 21:39:13 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:17:37 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,15 @@ void	check_valid_line(char const *str, char const *target, t_main *data)
 	else
 		return ;
 	if (!ft_isspace(tmp[i + 1]))
-		close_program("Error\nNeed at least one space before path", data);
+		close_program(NO_SPACE_PATH_ERROR, data);
 	while (tmp[++i] && tmp[i] != '.')
-	{
 		if (!ft_isspace(tmp[i]))
-			close_program("Error\nInvalid data between identifier and path",
-				data);
-	}
+			close_program(IDENTIFIER_PATH_ERROR, data);
 	while (tmp[i] && !ft_isspace(tmp[i]))
 		i++;
 	while (tmp[++i])
 		if (!ft_isspace(tmp[i]) && tmp[i] != '\n')
-			close_program("Error\nInvalid data after path", data);
+			close_program(AFTER_PATH_ERROR, data);
 	tmp = NULL;
 	return ;
 }
@@ -70,10 +67,8 @@ void	deep_check_info(char **tab, t_main *data)
 	int			x;
 
 	i = -1;
-	while (tab[++i])
+	while (!check_line(tab[++i], '1'))
 	{
-		if (check_line(tab[i], '1'))
-			break ;
 		x = -1;
 		while (++x < 6)
 			if (skip_spaces(tab[i], targets[x]))
@@ -81,11 +76,11 @@ void	deep_check_info(char **tab, t_main *data)
 		if (x < 4)
 			check_valid_line(tab[i], targets[x], data);
 		if (x == 6 && *tab[i] != '\n' && !check_line(tab[i], 32))
-			close_program("Error\nInvalid data", data);
+			close_program(INVALID_DATA_ERROR, data);
 		j = i;
 		while (tab[++j] && x != 6)
 			if (skip_spaces(tab[j], targets[x]))
-				close_program("Error\n2 entries for same identifier", data);
+				close_program(DUPLICATED_ENTRY_ERROR, data);
 	}
 	return ;
 }
@@ -118,4 +113,9 @@ void	deep_check_info(char **tab, t_main *data)
 	while (tab[i] && check_line(tab[i], 32))
 		i++;
 	data->map->map = produce_map(tab, i, data);
+}*/
+
+/*void	find_map(t_main *data)
+{
+	
 }*/
