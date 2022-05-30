@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/30 16:17:37 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/30 17:32:32 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,37 +85,29 @@ void	deep_check_info(char **tab, t_main *data)
 	return ;
 }
 
-/*int		**produce_map(char **tab, int start, t_main *data)
+void	find_map(t_main *data)
 {
-	int		**ret;
-	char	**dup;
-}*/
+	char	**tmp;
+	int		i;
+	int		j;
 
-/*void	get_map(char **tab, t_main *data)
-{
-	char const	*trgts[6] = {"NO", "SO", "WE", "EA", "F", "C"};
-	int			i;
-	int			c;
-	int			x;
-
-	i = -1;
-	c = 0;
-	while (tab[++i] && c < 6)
-	{
-		x = -1;
-		while (++x < 6 && !ft_strnstr(tab[i], trgts[x], ft_strlen(trgts[x])))
-			;
-		if (x == 6)
-			continue ;
-		else
-			c++;
-	}
-	while (tab[i] && check_line(tab[i], 32))
+	i = 0;
+	while (!check_line(data->raw_map[i], '1'))
 		i++;
-	data->map->map = produce_map(tab, i, data);
-}*/
-
-/*void	find_map(t_main *data)
-{
-	
-}*/
+	tmp = (char **)malloc(sizeof(char *) * (data->map->height - i + 1));
+	if (!tmp)
+		close_program(MALLOC_ERROR, data);
+	j = -1;
+	while (data->raw_map[i])
+	{
+		tmp[++j] = ft_strdup(data->raw_map[i++]);
+		if (!tmp[j])
+		{
+			tmp = ft_free_tab((void **)tmp);
+			close_program(MALLOC_ERROR, data);
+		}
+	}
+	tmp[++j] = NULL;
+	data->raw_map = ft_free_tab((void **)data->raw_map);
+	data->raw_map = tmp;
+}
