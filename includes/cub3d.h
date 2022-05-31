@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/30 17:40:54 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/31 14:07:30 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # include <stdio.h>
 
 # define MINLEN_ARG				5
-# define INVALID_ARG_ERROR		"Error\nArgument is not a '.cub' file"
+# define ARG_NUM_ERROR			"Error\nNeed exactly one '.cub' parameter"
+# define INVALID_ARG_ERROR		"Error\nArgument does not have '.cub' extension"
 # define FILE_ERROR				"Error\nFile can't be opened or doesn't exist"
 # define MALLOC_ERROR 			"Error\nMalloc failed"
 # define INVALID_DATA_ERROR 	"Error\nInvalid data"
@@ -29,6 +30,10 @@
 # define AFTER_PATH_ERROR		"Error\nInvalid data after path"
 # define NO_SPACE_PATH_ERROR	"Error\nNeed at least one space before path"
 # define IDENTIFIER_PATH_ERROR	"Error\nInvalid data between identifier and path"
+# define INVALID_MAP_ERROR		"Error\nInvalid map"
+# define MULTIPLE_SPAWN_ERROR	"Error\nMultiple spawns found"
+# define SPAWN_ERROR			"Error\nInvalid spawn location"
+# define NO_SPAWN_ERROR			"Error\nNo spawn found"
 
 typedef struct s_map
 {
@@ -51,15 +56,17 @@ typedef struct s_main
 	char	**raw_map;
 }	t_main;
 
-/** PARSING.C **/
+/** GET_FILE_INFO.C **/
 void	basic_check_arg(char const *path, t_main *data);
 void	get_map_info(char const *path, t_main *data);
 char	*retrieve_info(char **tab, char const *target, t_main *data);
 void	get_info(t_main *data);
 
-/** PARSING_MAP.C  **/
+/** CHECK_FILE_INFO.C  **/
 int		check_line(char const *str, int c);
 void	deep_check_info(char **tab, t_main *data);
+
+/** PARSING_MAP.C  **/
 void	find_map(t_main *data);
 void	get_map(char **tab, t_main *data);
 

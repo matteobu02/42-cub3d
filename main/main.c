@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/30 16:39:44 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/31 13:12:59 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_map	*init_map_struct(void)
 
 	ret = (t_map *)malloc(sizeof(t_map));
 	if (!ret)
-		close_program("Error\nMalloc failed", NULL);
+		close_program(MALLOC_ERROR, NULL);
 	ret->map = NULL;
 	ret->no = NULL;
 	ret->so = NULL;
@@ -26,6 +26,8 @@ t_map	*init_map_struct(void)
 	ret->ea = NULL;
 	ret->c = -1;
 	ret->f = -1;
+	ret->start_posx = -1;
+	ret->start_posy = -1;
 	return (ret);
 }
 
@@ -45,7 +47,7 @@ int	main(int ac, char **av)
 	t_main	data;
 
 	if (ac != 2)
-		close_program("Error\nNeed exactly one '.cub' parameter", NULL);
+		close_program(ARG_NUM_ERROR, NULL);
 	data.map = init_map_struct();
 	basic_check_arg(av[1], &data);
 	get_map_info(av[1], &data);
