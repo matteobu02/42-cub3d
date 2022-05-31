@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/31 14:07:30 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/31 14:13:25 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # define NO_SPACE_PATH_ERROR	"Error\nNeed at least one space before path"
 # define IDENTIFIER_PATH_ERROR	"Error\nInvalid data between identifier and path"
 # define INVALID_MAP_ERROR		"Error\nInvalid map"
-# define MULTIPLE_SPAWN_ERROR	"Error\nMultiple spawns found"
+# define MULTIPLE_SPAWN_ERROR	"Error\nMultiple spawn locations found"
 # define SPAWN_ERROR			"Error\nInvalid spawn location"
 # define NO_SPAWN_ERROR			"Error\nNo spawn found"
 
@@ -68,7 +68,7 @@ void	deep_check_info(char **tab, t_main *data);
 
 /** PARSING_MAP.C  **/
 void	find_map(t_main *data);
-void	get_map(char **tab, t_main *data);
+void	check_map(t_main *data, char **tab);
 
 /** PARSING_UTILS.C  **/
 char	*skip_spaces(char const *str, char const *target);

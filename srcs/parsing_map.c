@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:01:41 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/31 14:08:03 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/31 14:24:30 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,29 @@ void	find_map(t_main *data)
 
 void	check_map(t_main *data, char **tab)
 {
-	int			i;
-	int			j;
-	int			x;
+	int			vars[3];
 	char const	poss[7] = {'1', '0', ' ', 'N', 'S', 'E', 'W'};
 
-	i = -1;
-	while (tab[++i])
+	vars[0] = -1;
+	while (tab[++vars[0]])
 	{
-		j = -1;
-		while (tab[i][++j] && tab[i][j] != '\n')
+		vars[1] = -1;
+		while (tab[vars[0]][++vars[1]] && tab[vars[0]][vars[1]] != '\n')
 		{
-			x = 0;
-			while (x < 7 && poss[x] != tab[i][j])
-				x++;
-			if (x == 7)
+			vars[2] = 0;
+			while (vars[2] < 7 && poss[vars[2]] != tab[vars[0]][vars[1]])
+				vars[2]++;
+			if (vars[2] == 7)
 				close_program(INVALID_MAP_ERROR, data);
-			if (x > 2)
+			if (vars[2] > 2)
 			{
 				if (data->map->start_posx != -1)
 					close_program(MULTIPLE_SPAWN_ERROR, data);
-				data->map->start_posx = j;
-				data->map->start_posy = i;
+				data->map->start_posx = vars[1];
+				data->map->start_posy = vars[0];
 			}
 		}
 	}
+	if (data->map->start_posx == -1)
+		close_program(NO_SPAWN_ERROR, data);
 }
