@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:48 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/31 13:59:29 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/31 17:27:44 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*retrieve_info(char **tab, char const *trgt, t_main *data)
 	char	*tmp;
 
 	i = -1;
-	while (!check_line(tab[++i], '1'))
+	while (tab[++i] && !check_line(tab[i], '1'))
 	{
 		if (skip_spaces(tab[i], trgt) && !check_line(tab[i] + 2, 32))
 		{
@@ -126,6 +126,8 @@ void	get_map_info(char const *path, t_main *data)
 	}
 	data->raw_map[++i] = NULL;
 	close(fd);
+	if (!*data->raw_map)
+		close_program(FILE_EMPTY_ERROR, data);
 	get_info(data);
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:01:41 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/31 14:24:30 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/31 16:21:25 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,3 +68,19 @@ void	check_map(t_main *data, char **tab)
 	if (data->map->start_posx == -1)
 		close_program(NO_SPAWN_ERROR, data);
 }
+
+/*void	check_map_closed(char **tab, t_main *data)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (tab[++i])
+	{
+		j = -1;
+		while (tab[i][++j])
+		{
+
+		}
+	}
+}*/

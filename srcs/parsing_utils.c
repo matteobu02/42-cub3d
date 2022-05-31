@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:34:30 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/30 17:35:06 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/31 16:26:22 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*skip_spaces(char const *str, char const *target)
 	char	*tmp2;
 
 	tmp = (char *)str;
-	while (*tmp && ft_isspace(*tmp))
+	while (tmp && *tmp && ft_isspace(*tmp))
 		tmp++;
 	tmp2 = ft_strnstr(tmp, target, ft_strlen(target));
 	if (!tmp2)

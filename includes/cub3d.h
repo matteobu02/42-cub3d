@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/31 14:13:25 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/31 16:23:54 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define ARG_NUM_ERROR			"Error\nNeed exactly one '.cub' parameter"
 # define INVALID_ARG_ERROR		"Error\nArgument does not have '.cub' extension"
 # define FILE_ERROR				"Error\nFile can't be opened or doesn't exist"
+# define FILE_EMPTY_ERROR		"Error\nFile empty"
 # define MALLOC_ERROR 			"Error\nMalloc failed"
 # define INVALID_DATA_ERROR 	"Error\nInvalid data"
 # define INVALID_RGB_ERROR 		"Error\nInvalid RGB data"
