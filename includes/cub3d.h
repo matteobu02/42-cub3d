@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/31 16:23:54 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/31 18:27:35 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define MULTIPLE_SPAWN_ERROR	"Error\nMultiple spawn locations found"
 # define SPAWN_ERROR			"Error\nInvalid spawn location"
 # define NO_SPAWN_ERROR			"Error\nNo spawn found"
+# define MAP_OPEN_ERROR			"Error\nMap is not closed"
 
 typedef struct s_map
 {

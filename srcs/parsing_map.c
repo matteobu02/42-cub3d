@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:01:41 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/31 16:21:25 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/05/31 18:27:50 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,11 @@ void	check_map(t_main *data, char **tab)
 		j = -1;
 		while (tab[i][++j])
 		{
-
+			while (ft_isspace(tab[i][j]))
+				j++;
+			if (tab[i][j] != '1')
+				close_program(MAP_OPEN_ERROR, data);
+			if (tab[i][j] == '0' && ())
 		}
 	}
 }*/
