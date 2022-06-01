@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/31 18:27:35 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/01 13:49:08 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	check_map(t_main *data, char **tab);
 
 /** PARSING_UTILS.C  **/
 char	*skip_spaces(char const *str, char const *target);
-int		get_map_width(char const **tab);
+int		get_map_width(char **tab);
+void	check_map_closed(char **tab, t_main *data);
 
 /** FREE.C  **/
 void	close_program(char const *msg, t_main *ptr);

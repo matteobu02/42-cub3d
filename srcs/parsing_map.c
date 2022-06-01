@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:01:41 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/31 18:27:50 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/01 13:50:11 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,51 @@ void	check_map(t_main *data, char **tab)
 		close_program(NO_SPAWN_ERROR, data);
 }
 
-/*void	check_map_closed(char **tab, t_main *data)
+int		**get_new_map(t_main *data)
+{
+	int	i;
+	int	size;
+	int	**ret;
+
+	ret = (int **)malloc(sizeof(int *) * (data->map->height + 1));
+	if (!ret)
+		close_program(MALLOC_ERROR, data);
+	size = get_map_width(data->raw_map);
+	i = -1;
+	while (++i < data->map->height)
+	{
+		ret[i] = (int *)malloc(sizeof(int) * (size + 1));
+		if (!ret[i])
+		{
+			ret = ft_free_tab((void **)ret);
+			close_program(MALLOC_ERROR, data);
+		}
+	}
+	ret[i] = NULL;
+	return (ret);
+}
+
+/*int		**convert_map(t_main *data)
+{
+	int	i;
+	int	j;
+	int	**ret;
+
+	ret = get_new_map(data);
+	i = -1;
+	while (++i < data->map->height)
+	{
+		j = -1;
+		while (data->raw_map[i][++j] && data->raw_map[i][j] != '\n')
+		{
+			if (data->raw_map[i][j] == ' ')
+				
+			ret[i][j] = data->raw_map[i][j] - 48;
+		}
+	}
+}*/
+
+void	check_map_closed(char **tab, t_main *data)
 {
 	int	i;
 	int	j;
@@ -78,13 +122,18 @@ void	check_map(t_main *data, char **tab)
 	while (tab[++i])
 	{
 		j = -1;
-		while (tab[i][++j])
+		while (tab[i][++j] && tab[i][j] != '\n')
 		{
-			while (ft_isspace(tab[i][j]))
-				j++;
-			if (tab[i][j] != '1')
+			if (ft_isspace(tab[i][j]) || !j)
+			{
+				while (tab[i][j] && ft_isspace(tab[i][j]))
+					j++;
+				if (tab[i][j++] != '1')
+					close_program(MAP_OPEN_ERROR, data);
+			}
+			if (tab[i][j] == '0' && (tab[i][j + 1] == ' ' || tab[i + 1][j] == ' '
+					|| tab[i - 1][j] == ' '))
 				close_program(MAP_OPEN_ERROR, data);
-			if (tab[i][j] == '0' && ())
 		}
 	}
-}*/
+}
