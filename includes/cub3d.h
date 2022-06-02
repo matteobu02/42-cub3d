@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/01 13:49:08 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/02 02:23:37 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 typedef struct s_map
 {
 	int		height;
+	int		width;
 	int		**map;
 	char	*no;
 	char	*so;
@@ -71,11 +72,13 @@ void	deep_check_info(char **tab, t_main *data);
 /** PARSING_MAP.C  **/
 void	find_map(t_main *data);
 void	check_map(t_main *data, char **tab);
+int		**convert_map(t_main *data);
+void	check_map_closed(int **tab, t_main *data);
 
 /** PARSING_UTILS.C  **/
 char	*skip_spaces(char const *str, char const *target);
 int		get_map_width(char **tab);
-void	check_map_closed(char **tab, t_main *data);
+void	check_map_closed(int **tab, t_main *data);
 
 /** FREE.C  **/
 void	close_program(char const *msg, t_main *ptr);

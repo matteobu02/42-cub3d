@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 14:11:14 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/24 15:41:20 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/02 01:47:45 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	*ft_free_tab(void **tab);
 void	*ft_free_str(char *s);
 int		ft_isdigit(int c);
 int		ft_isspace(int c);
+void	*ft_memset(void *s, int c, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	ft_print_tab(char **tab);
 void	ft_putendl_fd(char const *str, int const fd);
