@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/31 14:02:33 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/02 12:29:42 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ int	check_line(char const *str, int c)
 	while (str[++i])
 		if (str[i] != c && str[i] != '\n')
 			return (0);
-	if (i == ft_strlen(str))
-		return (1);
-	return (0);
+	return (i == ft_strlen(str));
 }
 
 void	check_valid_line(char const *str, char const *target, t_main *data)

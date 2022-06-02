@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:01:41 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/02 02:28:13 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/02 18:07:32 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	find_map(t_main *data)
 	tmp[++j] = NULL;
 	data->raw_map = ft_free_tab((void **)data->raw_map);
 	data->raw_map = tmp;
+	data->map->width = get_map_width(tmp) - 1;
 }
 
 void	check_map(t_main *data, char **tab)
@@ -71,13 +72,17 @@ void	check_map(t_main *data, char **tab)
 
 int	**get_new_map(t_main *data)
 {
-	int	i;
 	int	**ret;
+	int	i;
 
+	i = -1;
+	data->map->height = 0;
+	while (data->raw_map[++i])
+		if (!check_line(data->raw_map[i], '\n'))
+			data->map->height++;
 	ret = (int **)malloc(sizeof(int *) * (data->map->height + 1));
 	if (!ret)
 		close_program(MALLOC_ERROR, data);
-	data->map->width = get_map_width(data->raw_map);
 	i = -1;
 	while (++i < data->map->height)
 	{
@@ -87,35 +92,37 @@ int	**get_new_map(t_main *data)
 			ret = ft_free_tab((void **)ret);
 			close_program(MALLOC_ERROR, data);
 		}
-		ft_memset(ret[i], 32, data->map->width);
+		fill_with_space(ret[i], data->map->width);
 	}
 	ret[i] = NULL;
 	return (ret);
 }
 
-int	**convert_map(t_main *data)
+void	convert_map(t_main *data)
 {
 	int	i;
 	int	j;
-	int	**ret;
+	int	x;
 
-	ret = get_new_map(data);
+	data->map->map = get_new_map(data);
 	i = -1;
-	while (++i < data->map->height)
+	x = 0;
+	while (data->raw_map[++i])
 	{
+		if (check_line(data->raw_map[i], '\n'))
+			skip_empty_lines(data, &i);
 		j = -1;
-		while (++j < data->map->width)
+		while (++j < ft_strlen(data->raw_map[i]))
 		{
-			if (data->raw_map[i][j] == 32)
+			if (ft_isspace(data->raw_map[i][j]))
 				continue ;
 			else if (ft_isdigit(data->raw_map[i][j]))
-				ret[i][j] = data->raw_map[i][j] - 48;
+				data->map->map[x][j] = data->raw_map[i][j] - 48;
 			else
-				ret[i][j] = 0;
+				data->map->map[x][j] = 0;
 		}
+		x++;
 	}
-	data->raw_map = ft_free_tab((void **)data->raw_map);
-	return (ret);
 }
 
 void	check_map_closed(int **tab, t_main *data)
@@ -123,23 +130,25 @@ void	check_map_closed(int **tab, t_main *data)
 	int	i;
 	int	j;
 
+	data->raw_map = ft_free_tab((void **)data->raw_map);
 	i = -1;
 	while (tab[++i])
 	{
 		j = -1;
-		while (++j < data->map->width)
+		while (++j < data->map->width - 1)
 		{
 			if (tab[i][j] == 32 || !j)
 			{
 				while (j < data->map->width && tab[i][j] == 32)
 					j++;
-				//check int tab
-				if (tab[i][j++] != 1)
-					close_program("Error\nmdr", data);
+				if (j == data->map->width)
+					continue ;
+				if (tab[i][j] != 1)
+					close_program(MAP_OPEN_ERROR, data);
 			}
 			if (!tab[i][j] && (tab[i][j + 1] == 32
 				|| tab[i + 1][j] == 32 || tab[i - 1][j] == 32))
-				close_program("Error\nlol", data);
+				close_program(MAP_OPEN_ERROR, data);
 		}
 	}
 	return ;

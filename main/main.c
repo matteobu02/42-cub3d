@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/02 02:23:58 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/02 17:27:43 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_map	*init_map_struct(void)
 	ret->f = -1;
 	ret->start_posx = -1;
 	ret->start_posy = -1;
+	ret->width = 0;
 	return (ret);
 }
 
@@ -54,7 +55,7 @@ int	main(int ac, char **av)
 	deep_check_info(data.raw_map, &data);
 	find_map(&data);
 	check_map(&data, data.raw_map);
-	data.map->map = convert_map(&data);
+	convert_map(&data);
 	check_map_closed(data.map->map, &data);
 	close_program(NULL, &data);
 	return (0);
