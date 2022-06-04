@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/05 00:33:14 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/05 00:39:17 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	deep_check_info(char **tab, t_main *data)
 		if (x < 4)
 			check_valid_line(tab[i], targets[x], data);
 		if (x == 6 && *tab[i] != '\n' && !check_line(tab[i], 32))
-			close_program("Error\nlol", data);
+			close_program(INVALID_DATA_ERROR, data);
 		j = i;
 		while (tab[++j] && x != 6)
 			if (skip_spaces(tab[j], targets[x]))
