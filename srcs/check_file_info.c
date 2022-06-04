@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/02 12:29:42 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/05 00:33:14 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,17 @@ int	check_line(char const *str, int c)
 {
 	int	i;
 
-	if (!str)
-		return (0);
-	i = -1;
-	if (!ft_isspace(c))
+	i = 0;
+	while (str[i] && (ft_isspace(str[i]) || str[i] == '\n' || str[i] == c))
+		i++;
+	if (i == ft_strlen(str))
 	{
-		while (str[++i] && ft_isspace(str[i]))
-			;
-		if (!str[i])
+		if (!ft_isspace(c) && !ft_strchr(str, c))
 			return (0);
-		--i;
+		else
+			return (1);
 	}
-	while (str[++i])
-		if (str[i] != c && str[i] != '\n')
-			return (0);
-	return (i == ft_strlen(str));
+	return (0);
 }
 
 void	check_valid_line(char const *str, char const *target, t_main *data)
@@ -74,7 +70,7 @@ void	deep_check_info(char **tab, t_main *data)
 		if (x < 4)
 			check_valid_line(tab[i], targets[x], data);
 		if (x == 6 && *tab[i] != '\n' && !check_line(tab[i], 32))
-			close_program(INVALID_DATA_ERROR, data);
+			close_program("Error\nlol", data);
 		j = i;
 		while (tab[++j] && x != 6)
 			if (skip_spaces(tab[j], targets[x]))
