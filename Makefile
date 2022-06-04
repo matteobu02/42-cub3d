@@ -6,7 +6,7 @@
 #    By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 17:30:02 by lyaiche           #+#    #+#              #
-#    Updated: 2022/06/02 18:11:50 by mbucci           ###   ########.fr        #
+#    Updated: 2022/06/05 00:55:09 by mbucci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ COMMONDIR = ./srcs/
 INCLUDES = ./includes/
 LIBFT = ./libft/
 NAME = cub3D
-CFLAGS = -Wall -Wextra -Werror -g #${SANIFLAG}
+CFLAGS = -Wall -Wextra -Werror -g ${SANIFLAG}
 SANIFLAG = -fsanitize=address
 
 #=========#

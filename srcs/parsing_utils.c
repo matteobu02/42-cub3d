@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:34:30 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/02 18:07:42 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/05 01:01:55 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ void	skip_empty_lines(t_main *data, int *i)
 {
 	while (data->raw_map[*i] && check_line(data->raw_map[*i], '\n'))
 		*i += 1;
-	if (!check_line(data->raw_map[*i], '1'))
+	if (data->raw_map[*i] && !check_line(data->raw_map[*i], '1'))
 		close_program(INVALID_MAP_ERROR, data);
 }

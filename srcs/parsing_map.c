@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:01:41 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/02 18:07:32 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/05 01:03:22 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,8 @@ void	convert_map(t_main *data)
 	{
 		if (check_line(data->raw_map[i], '\n'))
 			skip_empty_lines(data, &i);
+		if (!data->raw_map[i])
+			break ;
 		j = -1;
 		while (++j < ft_strlen(data->raw_map[i]))
 		{
