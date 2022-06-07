@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:01:41 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/05 01:03:22 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/07 14:17:13 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	find_map(t_main *data)
 	tmp[++j] = NULL;
 	data->raw_map = ft_free_tab((void **)data->raw_map);
 	data->raw_map = tmp;
-	data->map->width = get_map_width(tmp) - 1;
+	data->map->width = get_map_width(tmp) + 1;
 }
 
 void	check_map(t_main *data, char **tab)
@@ -114,7 +114,7 @@ void	convert_map(t_main *data)
 		if (!data->raw_map[i])
 			break ;
 		j = -1;
-		while (++j < ft_strlen(data->raw_map[i]))
+		while (++j < ft_strlen(data->raw_map[i]) && j < data->map->width)
 		{
 			if (ft_isspace(data->raw_map[i][j]))
 				continue ;

@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:34:30 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/05 01:01:55 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/07 14:17:13 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ int	get_map_width(char **tab)
 	while (tab[++i])
 	{
 		tmp = ft_strlen(tab[i]);
+		if (tab[i][tmp - 1] == '\n')
+			tmp--;
+		while (--tmp > -1 && ft_isspace(tab[i][tmp]))
+			;
 		if (tmp > ret)
 			ret = tmp;
 	}
