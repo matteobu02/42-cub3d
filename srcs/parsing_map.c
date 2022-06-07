@@ -6,11 +6,31 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:01:41 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/07 14:17:13 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/07 15:11:27 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/*void	print_tab(int **tab, int size)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	while (tab[++i])
+	{
+		j = -1;
+		while (++j < size)
+		{
+			if (tab[i][j] == 32)
+				printf(".");
+			else
+				printf("%d", tab[i][j]);
+		}
+		printf("\n");
+	}
+}*/
 
 void	find_map(t_main *data)
 {
@@ -132,7 +152,6 @@ void	check_map_closed(int **tab, t_main *data)
 	int	i;
 	int	j;
 
-	data->raw_map = ft_free_tab((void **)data->raw_map);
 	i = -1;
 	while (tab[++i])
 	{
@@ -148,10 +167,11 @@ void	check_map_closed(int **tab, t_main *data)
 				if (tab[i][j] != 1)
 					close_program(MAP_OPEN_ERROR, data);
 			}
+			if (i + 1 == data->map->height && !tab[i][j])
+				close_program(MAP_OPEN_ERROR, data);
 			if (!tab[i][j] && (tab[i][j + 1] == 32
 				|| tab[i + 1][j] == 32 || tab[i - 1][j] == 32))
 				close_program(MAP_OPEN_ERROR, data);
 		}
 	}
-	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/02 17:27:43 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/07 15:19:32 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,27 @@ t_map	*init_map_struct(void)
 	printf("%d\n", data->map->c);
 }*/
 
+void	parser(int ac, char *path, t_main *data)
+{
+	if (ac != 2)
+		close_program(ARG_NUM_ERROR, NULL);
+	data->map = init_map_struct();
+	basic_check_arg(path, data);
+	get_map_info(path, data);
+	deep_check_info(data->raw_map, data);
+	find_map(data);
+	check_map(data, data->raw_map);
+	convert_map(data);
+	data->raw_map = ft_free_tab((void **)data->raw_map);
+	check_map_closed(data->map->map, data);
+	return ;
+}
+
 int	main(int ac, char **av)
 {
 	t_main	data;
 
-	if (ac != 2)
-		close_program(ARG_NUM_ERROR, NULL);
-	data.map = init_map_struct();
-	basic_check_arg(av[1], &data);
-	get_map_info(av[1], &data);
-	deep_check_info(data.raw_map, &data);
-	find_map(&data);
-	check_map(&data, data.raw_map);
-	convert_map(&data);
-	check_map_closed(data.map->map, &data);
+	parser(ac, av[1], &data);
 	close_program(NULL, &data);
 	return (0);
 }
