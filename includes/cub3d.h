@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/02 17:35:22 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/14 01:29:22 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define DUPLICATED_ENTRY_ERROR "Error\nMultiple entries for same identifier"
 # define MISSING_DATA_ERROR		"Error\nMissing or invalid data in file"
 # define AFTER_PATH_ERROR		"Error\nInvalid data after path"
-# define NO_SPACE_PATH_ERROR	"Error\nNeed at least one space before path"
+# define NO_SPACE_ENTRY_ERROR	"Error\nNeed at least one space after identifier"
 # define IDENTIFIER_PATH_ERROR	"Error\nInvalid data between identifier and path"
 # define INVALID_MAP_ERROR		"Error\nInvalid map"
 # define MULTIPLE_SPAWN_ERROR	"Error\nMultiple spawn locations found"
