@@ -6,31 +6,11 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:01:41 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/07 15:11:27 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/13 16:09:25 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/*void	print_tab(int **tab, int size)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (tab[++i])
-	{
-		j = -1;
-		while (++j < size)
-		{
-			if (tab[i][j] == 32)
-				printf(".");
-			else
-				printf("%d", tab[i][j]);
-		}
-		printf("\n");
-	}
-}*/
 
 void	find_map(t_main *data)
 {
