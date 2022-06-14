@@ -6,7 +6,7 @@
 #    By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 17:30:02 by lyaiche           #+#    #+#              #
-#    Updated: 2022/06/05 00:55:09 by mbucci           ###   ########.fr        #
+#    Updated: 2022/06/13 16:49:54 by lyaiche          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,18 @@ SRCS_SRC	=	get_file_info.c		\
 				check_file_info.c	\
 				parsing_map.c		\
 				parsing_utils.c		\
-				free.c
+				free.c				\
+				degtorad.c   		\
+				fixang.c            \
+				keyhook.c           \
+				launch.c            \
+				draw_map.c          \
+				draw_cube.c         \
+				getpix.c            \
+				put_pixel.c         \
+				raycast.c           \
+				vertline.c          \
+				
 				
 SRCS_OBJ	=	${addprefix ${OBJDIR}, ${SRCS_SRC:%.c=%.o}}
 
@@ -32,8 +43,9 @@ COMMONDIR = ./srcs/
 INCLUDES = ./includes/
 LIBFT = ./libft/
 NAME = cub3D
-CFLAGS = -Wall -Wextra -Werror -g ${SANIFLAG}
+CFLAGS = -Wall -Wextra -Werror -g ${SANIFLAG} 
 SANIFLAG = -fsanitize=address
+MLXFLAG = -lmlx -framework OpenGL -framework AppKit
 
 #=========#
 #Commandes#
@@ -51,7 +63,7 @@ ${OBJDIR}%.o : ${COMMONDIR}%.c
 
 ${NAME}: 						${OBJDIR} ${MAIN_OBJ}
 								@make -C libft
-								@gcc ${CFLAGS} ${MAIN_OBJ} -L ${LIBFT} -lft -o ${NAME}
+								@gcc ${CFLAGS} ${MLXFLAG} ${MAIN_OBJ} -L ${LIBFT} -lft -o ${NAME}
 								@printf "\e[32;3m$@ successfully built\e[0m\n"
 
 ${OBJDIR}:						

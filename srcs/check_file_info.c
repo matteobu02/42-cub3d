@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/05 00:56:52 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/13 16:47:25 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	check_valid_line(char const *str, char const *target, t_main *data)
 	else
 		return ;
 	if (!ft_isspace(tmp[i + 1]))
-		close_program(NO_SPACE_PATH_ERROR, data);
+		close_program(NO_SPACE_ENTRY_ERROR, data);
 	while (tmp[++i] && tmp[i] != '.')
 		if (!ft_isspace(tmp[i]))
 			close_program(IDENTIFIER_PATH_ERROR, data);

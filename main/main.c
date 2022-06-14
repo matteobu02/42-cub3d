@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/07 15:19:32 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/13 17:43:29 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,47 @@ t_map	*init_map_struct(void)
 	return (ret);
 }
 
-/*void	print_info(t_main *data)
+void	init_images(t_data *data)
 {
-	ft_print_tab(data->raw_map);
-	printf("%s", data->map->no);
-	printf("%s", data->map->so);
-	printf("%s", data->map->we);
-	printf("%s", data->map->ea);
-	printf("%d\n", data->map->f);
-	printf("%d\n", data->map->c);
-}*/
+	int	width;
+	int	height;
+
+	width = W;
+	height = H;
+	data->north.img = mlx_xpm_file_to_image(data->mlx, "images/forest.xpm",
+			&height, &width);
+	data->north.addr = mlx_get_data_addr(data->north.img, &data->north.bpp,
+			&data->north.lb, &data->north.endian);
+	data->south.img = mlx_xpm_file_to_image(data->mlx, "images/pixar.xpm",
+			&height, &width);
+	data->south.addr = mlx_get_data_addr(data->south.img, &data->south.bpp,
+			&data->south.lb, &data->south.endian);
+	data->west.img = mlx_xpm_file_to_image(data->mlx, "images/disney.xpm",
+			&height, &width);
+	data->west.addr = mlx_get_data_addr(data->west.img, &data->west.bpp,
+			&data->west.lb, &data->west.endian);
+	data->east.img = mlx_xpm_file_to_image(data->mlx, "images/dreamworks.xpm",
+			&height, &width);
+	data->east.addr = mlx_get_data_addr(data->east.img, &data->east.bpp,
+			&data->east.lb, &data->east.endian);
+}
+
+void	init_value(t_data *data, t_main *main)
+{	
+	data->mlx = mlx_init();
+	data->width = main->map->width;
+	data->height = main->map->height;
+	data->map = main->map->map;
+	data->pa = 90.0;
+	data->px = (float)main->map->start_posx + 0.5;
+	data->py = (float)main->map->start_posy + 0.5;
+	data->pdx = cos(degtorad(data->pa));
+	data->pdy = -sin(degtorad(data->pa));
+	data->map_data = main->map;
+	data->main = main;
+	init_images(data);
+	data->win = mlx_new_window(data->mlx, 1920, 1080, "Cub3d");
+}
 
 void	parser(int ac, char *path, t_main *data)
 {
@@ -61,9 +92,15 @@ void	parser(int ac, char *path, t_main *data)
 
 int	main(int ac, char **av)
 {
-	t_main	data;
+	t_main	main;
+	t_data	data;
 
-	parser(ac, av[1], &data);
-	close_program(NULL, &data);
+	parser(ac, av[1], &main);
+	init_value(&data, &main);
+	launch(&data);
+	mlx_do_key_autorepeaton(&data.mlx);
+	mlx_hook(&data.win, 2, 1L << 0, key_hook, &data);
+	mlx_hook(&data.win, 17, 1L << 5, end, &data);
+	mlx_loop(&data.mlx);
 	return (0);
 }
