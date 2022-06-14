@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:34:30 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/13 16:06:13 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/07 14:17:13 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ int	get_map_width(char **tab)
 		tmp = ft_strlen(tab[i]);
 		if (tab[i][tmp - 1] == '\n')
 			tmp--;
-		while (tmp > -1 && ft_isspace(tab[i][tmp]))
-			tmp--;
+		while (--tmp > -1 && ft_isspace(tab[i][tmp]))
+			;
 		if (tmp > ret)
 			ret = tmp;
 	}
-	return (ret + 1);
+	return (ret);
 }
 
 void	fill_with_space(int *tab, int size)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:12:08 by mbucci            #+#    #+#             */
-/*   Updated: 2022/05/31 16:33:15 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/13 16:18:03 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ void	*free_map(t_map *ptr)
 	return (NULL);
 }
 
+int	end(t_data *data)
+{
+	mlx_destroy_window(data->mlx, data->win);
+	close_program(NULL, data->main);
+	return (0);
+}
+
 void	close_program(char const *msg, t_main *ptr)
 {
 	if (ptr)
@@ -40,7 +47,6 @@ void	close_program(char const *msg, t_main *ptr)
 		if (ptr->map)
 			ptr->map = free_map(ptr->map);
 	}
-	//system("leaks cub3D");
 	if (msg)
 	{
 		ft_putendl_fd(msg, STDERR_FILENO);

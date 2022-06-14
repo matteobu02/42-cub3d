@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/13 15:28:01 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/13 15:41:33 by mbucci           ###   ########.fr       */
+/*   Created: 2022/05/12 13:48:48 by mbucci            #+#    #+#             */
+/*   Updated: 2022/06/05 00:33:23 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,55 +37,55 @@ void	basic_check_arg(char const *path, t_main *data)
 	return ;
 }
 
-char	*retrieve_info(char **t, char const *trgt, t_main *data)
+char	*retrieve_info(char **tab, char const *trgt, t_main *data)
 {
 	int		i;
 	char	*tmp;
 
 	i = -1;
-	while (t[++i] && !check_line(t[i], '1'))
+	while (tab[++i] && !check_line(tab[i], '1'))
 	{
-		if (skip_spaces(t[i], trgt) && !check_line(t[i] + ft_strlen(trgt), 32))
+		if (skip_spaces(tab[i], trgt) && !check_line(tab[i] + 2, 32))
 		{
 			if (!ft_strcmp(trgt, "F") || !ft_strcmp(trgt, "C"))
 			{
-				tmp = t[i];
+				tmp = tab[i];
 				while (tmp && !ft_isdigit(*tmp))
 				{
 					if (!ft_isspace(*tmp) && !ft_isdigit(*tmp) && *tmp != *trgt)
 						close_program(INVALID_DATA_ERROR, data);
 					tmp++;
 				}
-				return (--tmp);
+				return (tmp);
 			}
-			return (ft_strdup(ft_strchr(t[i], '.')));
+			return (ft_strdup(ft_strchr(tab[i], '.')));
 		}
 	}
 	close_program(MISSING_DATA_ERROR, data);
 	return (NULL);
 }
 
-int	get_rgb(char const *s, t_main *data)
+int	get_rgb(char const *str, t_main *data)
 {
 	int	nums[5];
 
-	if (!ft_isspace(*s))
-		close_program(NO_SPACE_ENTRY_ERROR, data);
+	if (!str)
+		close_program(INVALID_DATA_ERROR, data);
 	nums[3] = -1;
 	while (++nums[3] < 3)
 	{
-		nums[nums[3]] = ft_atoi(s);
+		nums[nums[3]] = ft_atoi(str);
 		if (nums[nums[3]] < 0 || nums[nums[3]] > 255)
 			close_program(INVALID_RGB_ERROR, data);
-		while (s && *s && (ft_isdigit(*s) || ft_isspace(*s)))
-			s++;
-		if ((*s && *s != ',' && *s != '\n') || (!*s && nums[3] < 2))
+		while (str && *str && (ft_isdigit(*str) || ft_isspace(*str)))
+			str++;
+		if ((*str && *str != ',' && *str != '\n') || (!*str && nums[3] < 2))
 			close_program(INVALID_RGB_ERROR, data);
-		else if (*s)
-			s++;
-		while (*s && ft_isspace(*s))
-			s++;
-		if (*s && !ft_isdigit(*s))
+		else if (*str)
+			str++;
+		while (*str && ft_isspace(*str))
+			str++;
+		if (*str && !ft_isdigit(*str))
 			close_program(INVALID_RGB_ERROR, data);
 	}
 	nums[4] = nums[0];
