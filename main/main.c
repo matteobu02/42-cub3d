@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/14 19:51:19 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/14 20:02:45 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,6 @@ int	main(int ac, char **av)
 	mlx_hook(data.win, 3, 0, key_hook_release, &data);
 	mlx_hook(data.win, 17, 0, end, &data);
 	mlx_loop_hook(data.mlx, launch, &data);
-	mlx_loop(&data.mlx);
+	mlx_loop(data.mlx);
 	return (0);
 }

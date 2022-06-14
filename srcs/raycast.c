@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:50:31 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/14 19:39:10 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/14 20:01:00 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	draw3drays(t_data *data)
 {
-	int	r, found, side, color, step_x, step_y, i;
+	int	r, found, side, step_x, step_y, i;
 	float  raymap_x, raymap_y, ray_step_x, ray_step_y, raystart_x, raystart_y, 
 			lenght_x, lenght_y, maxdistance, ra, dirx, diry, walldist, tick;
 
@@ -22,7 +22,6 @@ void	draw3drays(t_data *data)
 	tick = 60.0 / (double)W;
 	for(r = 0; r<W - 1;r++)
 	{
-		color = 0x6a2633;
 		dirx = cos(degtorad(ra));
 		diry = -sin(degtorad(ra));
 		ray_step_x = sqrtf(1.0 + ((diry / dirx) * (diry / dirx)));
