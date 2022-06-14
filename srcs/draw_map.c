@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:55:00 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/14 15:55:19 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/14 19:52:44 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@ void	draw_map(t_data *data)
 
 	minimap = &data->minimap;
 	y = -1;
-	while (++y < minimap->height)
-	{
-		x = -1;
-		while (++x < minimap->width)
-		{
-			put_pixel(x, y, 0x000000, data);
-		}
-	}
 	current_x = 0;
 	current_y = 0;
 	y = -1;
@@ -43,6 +35,9 @@ void	draw_map(t_data *data)
 				draw_cube(current_x, current_y, minimap->tile_size,
 					data, 0xffffff);
 			}
+			else
+				draw_cube(current_x, current_y, minimap->tile_size,
+					data, 0x000000);
 			current_x += minimap->tile_size;
 		}
 		current_x = 0;

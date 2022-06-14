@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/14 19:40:38 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/14 19:51:19 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	init_images(t_data *data)
 	int	width;
 	int	height;
 
-	width = 1280;
-	height = 720;
+	width = W;
+	height = H;
 	data->north.img = mlx_xpm_file_to_image(data->mlx, "images/forest.xpm",
 			&height, &width);
 	data->north.addr = mlx_get_data_addr(data->north.img, &data->north.bpp,
