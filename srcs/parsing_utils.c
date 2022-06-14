@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:34:30 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/07 14:17:13 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/14 15:28:12 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*skip_spaces(char const *str, char const *target)
 		while (*tmp && ft_isspace(*tmp))
 			tmp++;
 		tmp = ft_strnstr(tmp, "./", 2);
-		if (tmp)
+		if (tmp && *(tmp + 1) && !ft_isspace(*(tmp + 1)))
 			return (tmp2);
 		else
 			return (NULL);
@@ -50,12 +50,12 @@ int	get_map_width(char **tab)
 		tmp = ft_strlen(tab[i]);
 		if (tab[i][tmp - 1] == '\n')
 			tmp--;
-		while (--tmp > -1 && ft_isspace(tab[i][tmp]))
-			;
+		while (tmp > -1 && ft_isspace(tab[i][tmp]))
+			tmp--;
 		if (tmp > ret)
 			ret = tmp;
 	}
-	return (ret);
+	return (ret + 1);
 }
 
 void	fill_with_space(int *tab, int size)
