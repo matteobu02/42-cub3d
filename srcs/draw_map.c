@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:55:00 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/13 16:34:23 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/14 15:55:19 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	draw_map(t_data *data)
 	float		current_x;
 	float		current_y;
 
-	minimap = data->minimap;
+	minimap = &data->minimap;
 	y = -1;
 	while (++y < minimap->height)
 	{
@@ -33,7 +33,7 @@ void	draw_map(t_data *data)
 	current_x = 0;
 	current_y = 0;
 	y = -1;
-	while (++y < data->width)
+	while (++y < data->height)
 	{
 		x = -1;
 		while (++x < data->width)

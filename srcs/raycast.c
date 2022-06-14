@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:50:31 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/13 18:03:13 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/14 18:45:08 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	draw3drays(t_data *data)
 			lenght_y = ((raymap_y + 1.0) - raystart_y) * ray_step_y;
 		}
 		walldist = 0;
-		if (data->width < data->width)
-			maxdistance = data->width;
+		if (data->width < data->height)
+			maxdistance = data->height;
 		else
 			maxdistance = data->width;
 		found = 0;
@@ -78,13 +78,11 @@ void	draw3drays(t_data *data)
 				found = 1;
 				data->interx = raystart_x + (dirx * walldist);
 				data->intery = raystart_y + (diry * walldist);
-				data->raylen = sqrtf(powf(data->interx - data->px, 2)
-						+ powf(data->intery - data->py, 2));
 			}
 		}
-		data->draw_start = 540.0 - (1080.0 / (data->raylen
+		data->draw_start = 540.0 - (1080.0 / (walldist
 					* (cos(degtorad(data->pa - ra)))) / 2.0);
-		data->draw_end = 540.0 + (1080.0 / (data->raylen
+		data->draw_end = 540.0 + (1080.0 / (walldist
 					* (cos(degtorad(data->pa - ra)))) / 2.0);
 		i = -1;
 		if (data->draw_start >= 0)

@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:54:31 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/13 18:01:53 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/14 17:56:17 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	vertline(int x, int side, t_data *data, t_img *img)
 	w = W;
 	while (data->draw_start < data->draw_end)
 	{	
-		if (data->draw_start >= 0 && data->draw_start <= w - 1)
+		if (data->draw_start >= 0 && data->draw_start <= (h - 1))
 		{
 			if (side == 0)
 				color = getpix((data->intery - (int)(data->intery)) * (float)w,

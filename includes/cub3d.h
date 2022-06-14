@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/13 18:15:03 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/14 18:29:50 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ typedef struct s_map
 	char	orientation;
 }	t_map;
 
-
 typedef struct s_minimap
 {
 	int		length;
@@ -95,6 +94,8 @@ typedef struct s_data
 	void				*win;
 	float				px;
 	float				py;
+	float				old_x;
+	float				old_y;
 	float				pa;
 	float				pdx;
 	float				pdy;
@@ -116,7 +117,7 @@ typedef struct s_data
 	t_img				south;
 	t_img				west;
 	t_img				east;
-	struct s_minimap	*minimap;
+	struct s_minimap	minimap;
 	struct s_main		*main;
 }				t_data;
 typedef struct s_main
@@ -152,6 +153,7 @@ int		launch(t_data *data);
 
 /** KEY_HOOK.C  **/
 int		key_hook(int keycode, t_data *data);
+int		key_hook_release(int keycode, t_data *data);
 
 /** DEGTORAD.C  **/
 float	degtorad(float a);
