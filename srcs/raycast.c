@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:50:31 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/14 18:45:08 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/14 19:39:10 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	draw3drays(t_data *data)
 			lenght_x, lenght_y, maxdistance, ra, dirx, diry, walldist, tick;
 
 	ra = fixang(data->pa + 30.0);
-	tick = 60.0 / 1920.0;
-	for(r = 0; r<1919;r++)
+	tick = 60.0 / (double)W;
+	for(r = 0; r<W - 1;r++)
 	{
 		color = 0x6a2633;
 		dirx = cos(degtorad(ra));
@@ -80,9 +80,9 @@ void	draw3drays(t_data *data)
 				data->intery = raystart_y + (diry * walldist);
 			}
 		}
-		data->draw_start = 540.0 - (1080.0 / (walldist
+		data->draw_start = (float)(H / 2) - ((float)H / (walldist
 					* (cos(degtorad(data->pa - ra)))) / 2.0);
-		data->draw_end = 540.0 + (1080.0 / (walldist
+		data->draw_end = (float)(H / 2) + ((float)H / (walldist
 					* (cos(degtorad(data->pa - ra)))) / 2.0);
 		i = -1;
 		if (data->draw_start >= 0)
@@ -90,7 +90,7 @@ void	draw3drays(t_data *data)
 			while (++i < data->draw_start)
 				put_pixel(r, i, 0xBAE5F4, data);
 			i = data->draw_end;
-			while (i < 1080)
+			while (i < H)
 				put_pixel(r, i++, 0x5b5b5b, data);
 		}
 		if (side && cos(degtorad(ra + 90.0)) > 0.0)

@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/14 18:40:22 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/14 19:40:38 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	init_images(t_data *data)
 	int	width;
 	int	height;
 
-	width = W;
-	height = H;
+	width = 1280;
+	height = 720;
 	data->north.img = mlx_xpm_file_to_image(data->mlx, "images/forest.xpm",
 			&height, &width);
 	data->north.addr = mlx_get_data_addr(data->north.img, &data->north.bpp,
@@ -71,7 +71,7 @@ void	init_value(t_data *data, t_main *main)
 	data->map_data = main->map;
 	data->main = main;
 	init_images(data);
-	data->win = mlx_new_window(data->mlx, 1920, 1080, "Cub3d");
+	data->win = mlx_new_window(data->mlx, W, H, "Cub3d");
 }
 
 void	parser(int ac, char *path, t_main *data)
@@ -97,7 +97,6 @@ int	main(int ac, char **av)
 
 	parser(ac, av[1], &main);
 	init_value(&data, &main);
-	// mlx_do_key_autorepeaton(&data.mlx);
 	mlx_hook(data.win, 2, 0, key_hook, &data);
 	mlx_hook(data.win, 3, 0, key_hook_release, &data);
 	mlx_hook(data.win, 17, 0, end, &data);

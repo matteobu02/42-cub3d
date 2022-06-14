@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/14 18:29:50 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/14 19:38:44 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 # define NO_SPAWN_ERROR			"Error\nNo spawn found"
 # define MAP_OPEN_ERROR			"Error\nMap is not closed"
 # define DR 0.0174533
-# define W 1920
-# define H 1080
+# define W 1280
+# define H 720
 
 typedef struct s_map
 {
