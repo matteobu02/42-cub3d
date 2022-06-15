@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:12:08 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/14 18:15:42 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/15 14:54:00 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	*free_map(t_map *ptr)
 int	end(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
-	close_program(NULL, data->main);
+	// close_program(NULL, data->main);
+	exit(0);
 	return (0);
 }
 

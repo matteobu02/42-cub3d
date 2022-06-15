@@ -6,7 +6,7 @@
 #    By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 17:30:02 by lyaiche           #+#    #+#              #
-#    Updated: 2022/06/14 19:35:18 by lyaiche          ###   ########.fr        #
+#    Updated: 2022/06/15 14:15:18 by lyaiche          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS_SRC	=	get_file_info.c		\
 				degtorad.c   		\
 				fixang.c            \
 				keyhook.c           \
+				moves.c				\
 				launch.c            \
 				draw_map.c          \
 				draw_cube.c         \

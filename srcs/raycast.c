@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:50:31 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/14 20:01:00 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/15 17:36:29 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@ void	draw3drays(t_data *data)
 {
 	int	r, found, side, step_x, step_y, i;
 	float  raymap_x, raymap_y, ray_step_x, ray_step_y, raystart_x, raystart_y, 
-			lenght_x, lenght_y, maxdistance, ra, dirx, diry, walldist, tick;
+			lenght_x, lenght_y, maxdistance, ra, rpa, dirx, diry, walldist, tick;
 
 	ra = fixang(data->pa + 30.0);
-	tick = 60.0 / (double)W;
+	ra = degtorad(ra);
+	rpa = degtorad(data->pa);
+	tick = 1.0472 / (double)W;
 	for(r = 0; r<W - 1;r++)
 	{
-		dirx = cos(degtorad(ra));
-		diry = -sin(degtorad(ra));
+		dirx = cos((ra));
+		diry = -sin((ra));
 		ray_step_x = sqrtf(1.0 + ((diry / dirx) * (diry / dirx)));
 		ray_step_y = sqrtf(1.0 + ((dirx / diry) * (dirx / diry)));
 		raystart_x = data->px;
@@ -80,26 +82,26 @@ void	draw3drays(t_data *data)
 			}
 		}
 		data->draw_start = (float)(H / 2) - ((float)H / (walldist
-					* (cos(degtorad(data->pa - ra)))) / 2.0);
+					* (cos((rpa - ra)))) / 2.0);
 		data->draw_end = (float)(H / 2) + ((float)H / (walldist
-					* (cos(degtorad(data->pa - ra)))) / 2.0);
+					* (cos((rpa - ra)))) / 2.0);
 		i = -1;
 		if (data->draw_start >= 0)
 		{
 			while (++i < data->draw_start)
-				put_pixel(r, i, 0xBAE5F4, data);
+				put_pixel(r, i, data->main->map->c, data);
 			i = data->draw_end;
 			while (i < H)
-				put_pixel(r, i++, 0x5b5b5b, data);
+				put_pixel(r, i++, data->main->map->f, data);
 		}
-		if (side && cos(degtorad(ra + 90.0)) > 0.0)
+		if (side && cos((ra + 1.5708)) > 0.0)
 			vertline(r, side, data, &data->west);
 		else if (side)
 			vertline(r, side, data, &data->east);
-		else if (sin(degtorad(ra + 90.0)) > 0.0)
+		else if (sin((ra + 1.5708)) > 0.0)
 			vertline(r, side, data, &data->south);
 		else
 			vertline(r, side, data, &data->north);
-		ra = fixang(ra - tick);
+		ra = ra - tick;
 	}
 }

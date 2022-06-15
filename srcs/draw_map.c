@@ -6,43 +6,60 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:55:00 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/14 19:52:44 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/14 20:54:24 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	draw_map_5(int *x, float *current_x)
+{
+	*x = -1;
+	*current_x = 0;
+}
+
+void	draw_map_4(t_data *data)
+{
+	data->minimap.color = 0xfcba03;
+	draw_cube(data->px * data->minimap.tile_size,
+		data->py * data->minimap.tile_size, data->minimap.p_size, data);
+}
+
+void	draw_map_3(float current_x, float current_y, t_data *data)
+{
+	data->minimap.color = 0x000000;
+	draw_cube(current_x, current_y, data->minimap.tile_size,
+		data);
+}
+
+void	draw_map_2(float current_x, float current_y, t_data *data)
+{
+	data->minimap.color = 0xffffff;
+	draw_cube(current_x, current_y, data->minimap.tile_size,
+		data);
+}
+
 void	draw_map(t_data *data)
 {
-	t_minimap	*minimap;
 	int			x;
 	int			y;
 	float		current_x;
 	float		current_y;
 
-	minimap = &data->minimap;
-	y = -1;
-	current_x = 0;
-	current_y = 0;
-	y = -1;
+	current_y = 0.0;
+	y = 0;
 	while (++y < data->height)
 	{
-		x = -1;
+		draw_map_5(&x, &current_x);
 		while (++x < data->width)
 		{
 			if (data->map[y][x] == 1)
-			{
-				draw_cube(current_x, current_y, minimap->tile_size,
-					data, 0xffffff);
-			}
+				draw_map_2(current_x, current_y, data);
 			else
-				draw_cube(current_x, current_y, minimap->tile_size,
-					data, 0x000000);
-			current_x += minimap->tile_size;
+				draw_map_3(current_x, current_y, data);
+			current_x += data->minimap.tile_size;
 		}
-		current_x = 0;
-		current_y += minimap->tile_size;
+		current_y += data->minimap.tile_size;
 	}
-	draw_cube(data->px * minimap->tile_size, data->py * minimap->tile_size,
-		minimap->p_size, data, 0xfcba03);
+	draw_map_4(data);
 }

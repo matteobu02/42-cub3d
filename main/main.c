@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/14 20:02:45 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/15 16:20:39 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	init_images(t_data *data)
 void	init_value(t_data *data, t_main *main)
 {	
 	data->mlx = mlx_init();
+	init_images(data);
 	data->width = main->map->width;
 	data->height = main->map->height;
 	data->map = main->map->map;
@@ -70,8 +71,10 @@ void	init_value(t_data *data, t_main *main)
 	data->pdy = -sin(degtorad(data->pa));
 	data->map_data = main->map;
 	data->main = main;
-	init_images(data);
 	data->win = mlx_new_window(data->mlx, W, H, "Cub3d");
+	data->img = mlx_new_image(data->mlx, W, H);
+	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
+			&data->line_bytes, &data->endian);
 }
 
 void	parser(int ac, char *path, t_main *data)
@@ -97,10 +100,10 @@ int	main(int ac, char **av)
 
 	parser(ac, av[1], &main);
 	init_value(&data, &main);
-	mlx_hook(data.win, 2, 0, key_hook, &data);
+	mlx_hook(data.win, 2, 0, key_hook_press, &data);
 	mlx_hook(data.win, 3, 0, key_hook_release, &data);
 	mlx_hook(data.win, 17, 0, end, &data);
-	mlx_loop_hook(data.mlx, launch, &data);
+	mlx_loop_hook(data.mlx, key_hook, &data);
 	mlx_loop(data.mlx);
 	return (0);
 }

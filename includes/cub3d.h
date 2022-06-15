@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/14 19:38:44 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/15 14:36:36 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_minimap
 	int		height;
 	int		tile_size;
 	int		p_size;
+	int		color;
 }				t_minimap;
 
 typedef struct s_img
@@ -97,6 +98,7 @@ typedef struct s_data
 	float				old_x;
 	float				old_y;
 	float				pa;
+	float				rot;
 	float				pdx;
 	float				pdy;
 	float				interx;
@@ -112,6 +114,13 @@ typedef struct s_data
 	float				raylen;
 	float				draw_start;
 	float				draw_end;
+	int					color;
+	float				w;
+	float				s;
+	float				a;
+	float				d;
+	float				l;
+	float				r;
 	t_map				*map_data;
 	t_img				north;
 	t_img				south;
@@ -151,9 +160,17 @@ void	skip_empty_lines(t_main *data, int *index);
 /** LAUNCH.C  **/
 int		launch(t_data *data);
 
-/** KEY_HOOK.C  **/
-int		key_hook(int keycode, t_data *data);
+/** KEYHOOK.C  **/
+int		key_hook(t_data *data);
+int		key_hook_press(int keycode, t_data *data);
 int		key_hook_release(int keycode, t_data *data);
+
+/** KEYHOOK.C  **/
+void	go_forward(t_data *data);
+void	go_backward(t_data *data);
+void	go_right(t_data *data);
+void	go_left(t_data *data);
+void	rotate(t_data *data);
 
 /** DEGTORAD.C  **/
 float	degtorad(float a);
@@ -166,7 +183,7 @@ void	draw_map(t_data *data);
 
 /** DRAW_CUBE.C  **/
 void	draw_cube(float current_x, float current_y,
-			int size, t_data *data, int color);
+			int size, t_data *data);
 
 /** DRAW3DRAYS.C  **/
 void	draw3drays(t_data *data);
