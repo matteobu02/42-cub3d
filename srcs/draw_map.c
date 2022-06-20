@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lucasyaiche <lucasyaiche@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:55:00 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/14 20:54:24 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/20 04:29:49 by lucasyaiche      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,12 @@ void	draw_map_5(int *x, float *current_x)
 
 void	draw_map_4(t_data *data)
 {
+	float	shift;
+
+	shift = data->minimap.p_size / 2;
 	data->minimap.color = 0xfcba03;
-	draw_cube(data->px * data->minimap.tile_size,
-		data->py * data->minimap.tile_size, data->minimap.p_size, data);
+	draw_cube(data->px * data->minimap.tile_size - shift,
+		data->py * data->minimap.tile_size - shift, data->minimap.p_size, data);
 }
 
 void	draw_map_3(float current_x, float current_y, t_data *data)
@@ -47,7 +50,7 @@ void	draw_map(t_data *data)
 	float		current_y;
 
 	current_y = 0.0;
-	y = 0;
+	y = -1;
 	while (++y < data->height)
 	{
 		draw_map_5(&x, &current_x);

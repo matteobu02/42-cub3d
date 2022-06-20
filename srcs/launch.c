@@ -6,7 +6,7 @@
 /*   By: lucasyaiche <lucasyaiche@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 14:36:38 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/20 02:35:57 by lucasyaiche      ###   ########.fr       */
+/*   Updated: 2022/06/20 04:18:54 by lucasyaiche      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	launch(t_data *data)
 		minimap->tile_size = minimap->height / data->height;
 	else
 		minimap->tile_size = minimap->height / data->width;
-	minimap->p_size = minimap->tile_size / 10;
+	minimap->p_size = minimap->tile_size / 2;
 	draw_map(data);
 	mlx_clear_window(data->mlx, data->win);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
