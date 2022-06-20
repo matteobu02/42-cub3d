@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lucasyaiche <lucasyaiche@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 14:36:38 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/15 14:27:30 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/20 02:35:57 by lucasyaiche      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	launch(t_data *data)
 	t_minimap	*minimap;
 
 	minimap = &data->minimap;
-	draw3drays(data);
+	raycast(data);
 	minimap->height = 400;
 	minimap->width = 400;
 	if (data->width < data->height)

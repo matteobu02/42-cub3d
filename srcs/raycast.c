@@ -3,105 +3,117 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lucasyaiche <lucasyaiche@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:50:31 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/15 17:36:29 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/20 03:46:24 by lucasyaiche      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw3drays(t_data *data)
+void	init_values(t_data *data, t_raycast *raycast)
 {
-	int	r, found, side, step_x, step_y, i;
-	float  raymap_x, raymap_y, ray_step_x, ray_step_y, raystart_x, raystart_y, 
-			lenght_x, lenght_y, maxdistance, ra, rpa, dirx, diry, walldist, tick;
+	raycast->dirx = cos((raycast->ra));
+	raycast->diry = -sin((raycast->ra));
+	raycast->ray_step_x = sqrtf(1.0 + ((raycast->diry
+					/ raycast->dirx) * (raycast->diry / raycast->dirx)));
+	raycast->ray_step_y = sqrtf(1.0 + ((raycast->dirx
+					/ raycast->diry) * (raycast->dirx / raycast->diry)));
+	raycast->raystart_x = data->px;
+	raycast->raystart_y = data->py;
+	raycast->raymap_x = (int)data->px;
+	raycast->raymap_y = (int)data->py;
+	raycast->walldist = 0;
+	if (data->width < data->height)
+			raycast->maxdistance = data->height;
+	else
+			raycast->maxdistance = data->width;
+	raycast->found = 0;
+}
 
-	ra = fixang(data->pa + 30.0);
-	ra = degtorad(ra);
-	rpa = degtorad(data->pa);
-	tick = 1.0472 / (double)W;
-	for(r = 0; r<W - 1;r++)
+void	start_raycast(t_raycast *raycast)
+{
+	if (raycast->dirx < 0)
 	{
-		dirx = cos((ra));
-		diry = -sin((ra));
-		ray_step_x = sqrtf(1.0 + ((diry / dirx) * (diry / dirx)));
-		ray_step_y = sqrtf(1.0 + ((dirx / diry) * (dirx / diry)));
-		raystart_x = data->px;
-		raystart_y = data->py;
-		raymap_x = (int)data->px;
-		raymap_y = (int)data->py;
-		if (dirx < 0)
+		raycast->step_x = -1;
+		raycast->lenght_x = (raycast->raystart_x - raycast->raymap_x)
+			* raycast->ray_step_x;
+	}
+	else
+	{
+		raycast->step_x = 1;
+		raycast->lenght_x = ((raycast->raymap_x + 1.0) - raycast->raystart_x)
+			* raycast->ray_step_x;
+	}
+	if (raycast->diry < 0)
+	{
+		raycast->step_y = -1;
+		raycast->lenght_y = (raycast->raystart_y - raycast->raymap_y)
+			* raycast->ray_step_y;
+	}
+	else
+	{
+		raycast->step_y = 1;
+		raycast->lenght_y = ((raycast->raymap_y + 1.0) - raycast->raystart_y)
+			* raycast->ray_step_y;
+	}
+}
+
+void	find_wall(t_data *data, t_raycast *raycast)
+{
+	while (raycast->found == 0 && raycast->walldist
+		< raycast->maxdistance)
+	{
+		if (raycast->lenght_x < raycast->lenght_y)
 		{
-			step_x = -1;
-			lenght_x = (raystart_x - raymap_x) * ray_step_x;
+			raycast->raymap_x += raycast->step_x;
+			raycast->walldist = raycast->lenght_x;
+			raycast->lenght_x += raycast->ray_step_x;
+			raycast->side = 0;
 		}
 		else
 		{
-			step_x = 1;
-			lenght_x = ((raymap_x + 1.0) - raystart_x) * ray_step_x;
+			raycast->raymap_y += raycast->step_y;
+			raycast->walldist = raycast->lenght_y;
+			raycast->lenght_y += raycast->ray_step_y;
+			raycast->side = 1;
 		}
-		if (diry < 0)
+		if (data->map[(int)raycast->raymap_y][(int)raycast->raymap_x] == 1)
 		{
-			step_y = -1;
-			lenght_y = (raystart_y - raymap_y) * ray_step_y;
+			raycast->found = 1;
 		}
-		else
-		{
-			step_y = 1;
-			lenght_y = ((raymap_y + 1.0) - raystart_y) * ray_step_y;
-		}
-		walldist = 0;
-		if (data->width < data->height)
-			maxdistance = data->height;
-		else
-			maxdistance = data->width;
-		found = 0;
-		while (found == 0 && walldist < maxdistance)
-		{
-			if (lenght_x < lenght_y)
-			{
-				raymap_x += step_x;
-				walldist = lenght_x;
-				lenght_x += ray_step_x;
-				side = 0;
-			}
-			else
-			{
-				raymap_y += step_y;
-				walldist = lenght_y;
-				lenght_y += ray_step_y;
-				side = 1;
-			}
-			if (data->map[(int)raymap_y][(int)raymap_x] == 1)
-			{
-				found = 1;
-				data->interx = raystart_x + (dirx * walldist);
-				data->intery = raystart_y + (diry * walldist);
-			}
-		}
-		data->draw_start = (float)(H / 2) - ((float)H / (walldist
-					* (cos((rpa - ra)))) / 2.0);
-		data->draw_end = (float)(H / 2) + ((float)H / (walldist
-					* (cos((rpa - ra)))) / 2.0);
-		i = -1;
-		if (data->draw_start >= 0)
-		{
-			while (++i < data->draw_start)
-				put_pixel(r, i, data->main->map->c, data);
-			i = data->draw_end;
-			while (i < H)
-				put_pixel(r, i++, data->main->map->f, data);
-		}
-		if (side && cos((ra + 1.5708)) > 0.0)
-			vertline(r, side, data, &data->west);
-		else if (side)
-			vertline(r, side, data, &data->east);
-		else if (sin((ra + 1.5708)) > 0.0)
-			vertline(r, side, data, &data->south);
-		else
-			vertline(r, side, data, &data->north);
-		ra = ra - tick;
+	}
+}
+
+void	init_3d(t_data *data, t_raycast *raycast)
+{
+	data->interx = raycast->raystart_x + (raycast->dirx
+			* raycast->walldist);
+			data->intery = raycast->raystart_y + (raycast->diry
+			* raycast->walldist);
+	data->draw_start = (float)(H / 2) - ((float)H / (raycast->walldist
+				* (cos((raycast->rpa - raycast->ra)))) / 2.0);
+		data->draw_end = (float)(H / 2) + ((float)H / (raycast->walldist
+				* (cos((raycast->rpa - raycast->ra)))) / 2.0);
+}
+
+void	raycast(t_data *data)
+{
+	t_raycast	raycast;
+
+	raycast.r = -1;
+	raycast.ra = fixang(data->pa + 30.0);
+	raycast.ra = degtorad(raycast.ra);
+	raycast.rpa = degtorad(data->pa);
+	raycast.tick = 1.0472 / (double)W;
+	while (++raycast.r < W -1)
+	{
+		init_values(data, &raycast);
+		start_raycast(&raycast);
+		find_wall(data, &raycast);
+		init_3d(data, &raycast);
+		draw_frame(data, &raycast);
+		raycast.ra = raycast.ra - raycast.tick;
 	}
 }

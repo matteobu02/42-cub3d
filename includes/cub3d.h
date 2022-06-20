@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lucasyaiche <lucasyaiche@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/15 14:36:36 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/20 03:44:24 by lucasyaiche      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "libft.h"
-# include <mlx.h>
+# include <../minilibx_macos/mlx.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
@@ -78,6 +78,30 @@ typedef struct s_img
 	int				endian;
 	struct s_data	*data;
 }				t_img;
+
+typedef struct s_raycast
+{
+	int		found;
+	int		step_x;
+	int		step_y;
+	int		side;
+	int		r;
+	float	raymap_x;
+	float	raymap_y;
+	float	ray_step_x;
+	float	ray_step_y;
+	float	raystart_x;
+	float	raystart_y;
+	float	lenght_x;
+	float	lenght_y;
+	float	maxdistance;
+	float	ra;
+	float	rpa;
+	float	dirx;
+	float	diry;
+	float	walldist;
+	float	tick;
+}				t_raycast;
 
 typedef struct s_data
 {
@@ -186,10 +210,11 @@ void	draw_cube(float current_x, float current_y,
 			int size, t_data *data);
 
 /** DRAW3DRAYS.C  **/
-void	draw3drays(t_data *data);
+void	raycast(t_data *data);
 
-/** VERTLINE.C  **/
+/** DRAW_FRAME.C  **/
 void	vertline(int x, int side, t_data *data, t_img *img);
+void	draw_frame(t_data *data, t_raycast *raycast);
 
 /** PUT_PIXEL.C  **/
 void	put_pixel(int x, int y, int color, t_data *data);
