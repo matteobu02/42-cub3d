@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lucasyaiche <lucasyaiche@student.42.fr>    +#+  +:+       +#+         #
+#    By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 17:30:02 by lyaiche           #+#    #+#              #
-#    Updated: 2022/06/20 03:43:48 by lucasyaiche      ###   ########.fr        #
+#    Updated: 2022/06/20 17:20:32 by lyaiche          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS_SRC	=	get_file_info.c		\
 				put_pixel.c         \
 				raycast.c           \
 				draw_frame.c        \
+				onedirection.c		\
 				
 				
 SRCS_OBJ	=	${addprefix ${OBJDIR}, ${SRCS_SRC:%.c=%.o}}
@@ -46,7 +47,7 @@ LIBFT = ./libft/
 NAME = cub3D
 CFLAGS = -Wall -Wextra -Werror -g ${SANIFLAG} 
 SANIFLAG = -fsanitize=address
-MLXFLAG = -I minilibx -L minilibx_macos -lmlx -framework OpenGL -framework AppKit
+MLXFLAG = -lmlx -framework OpenGL -framework AppKit
 
 #=========#
 #Commandes#

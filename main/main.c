@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/15 16:20:39 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/20 17:17:36 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	init_value(t_data *data, t_main *main)
 	data->width = main->map->width;
 	data->height = main->map->height;
 	data->map = main->map->map;
-	data->pa = 90.0;
+	onedirection(data, main);
 	data->px = (float)main->map->start_posx + 0.5;
 	data->py = (float)main->map->start_posy + 0.5;
 	data->pdx = cos(degtorad(data->pa));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucasyaiche <lucasyaiche@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/20 03:44:24 by lucasyaiche      ###   ########.fr       */
+/*   Updated: 2022/06/20 17:25:39 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CUB3D_H
 
 # include "libft.h"
-# include <../minilibx_macos/mlx.h>
+# include <mlx.h>
 # include <fcntl.h>
 # include <stdio.h>
 # include <math.h>
@@ -226,5 +226,8 @@ int		getpix(int x, int y, t_img *img);
 int		end(t_data *data);
 void	close_program(char const *msg, t_main *ptr);
 void	*free_map(t_map *ptr);
+
+/** ONEDIRECTION.C  **/
+void	onedirection(t_data *data, t_main *main);
 
 #endif
