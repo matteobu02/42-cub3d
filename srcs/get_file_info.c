@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:48 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/14 15:34:31 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/22 13:55:04 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,33 +65,36 @@ char	*retrieve_info(char **t, char const *trgt, t_main *data)
 	return (NULL);
 }
 
-int	get_rgb(char const *s, t_main *data)
+/*
+ * n is an array where the first 3 elements are meant to store the rgb
+ * values. The 4th is an index (=i).
+*/
+
+int	get_rgb(char *s, t_main *data)
 {
-	int	nums[5];
+	int	n[4];
 
 	if (!ft_isspace(*s))
 		close_program(NO_SPACE_ENTRY_ERROR, data);
-	nums[3] = -1;
-	while (++nums[3] < 3)
+	n[3] = -1;
+	while (++n[3] < 3)
 	{
-		nums[nums[3]] = ft_atoi(s);
-		if (nums[nums[3]] < 0 || nums[nums[3]] > 255)
+		n[n[3]] = ft_atoi(s);
+		if (n[n[3]] > 255 || n[n[3]] < 0)
 			close_program(INVALID_RGB_ERROR, data);
-		while (s && *s && (ft_isdigit(*s) || ft_isspace(*s)))
-			s++;
-		if ((*s && *s != ',' && *s != '\n') || (!*s && nums[3] < 2))
+		s = skip_spaces_nums(s);
+		if ((*s && n[3] < 2 && *s != ',') || (!*s && n[3] < 2))
 			close_program(INVALID_RGB_ERROR, data);
-		else if (*s)
+		else if (*s && n[3] < 2)
 			s++;
-		while (*s && ft_isspace(*s))
+		while (s && *s && n[3] < 2 && ft_isspace(*s))
 			s++;
-		if (*s && !ft_isdigit(*s))
+		if (s && *s && !ft_isdigit(*s))
 			close_program(INVALID_RGB_ERROR, data);
 	}
-	nums[4] = nums[0];
-	nums[4] = (nums[4] << 8) + nums[1];
-	nums[4] = (nums[4] << 8) + nums[2];
-	return (nums[4]);
+	if (*s && *s != '\n')
+		close_program(INVALID_RGB_ERROR, data);
+	return (combine_rgb(n[0], n[1], n[2]));
 }
 
 void	get_info(t_main *data)

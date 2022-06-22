@@ -6,35 +6,31 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 12:34:30 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/14 15:48:37 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/22 13:54:47 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char	*skip_spaces(char const *str, char const *target)
+char	*skip_spaces_nums(char *s)
 {
-	char	*tmp;
-	char	*tmp2;
+	while (s && *s && ft_isspace(*s))
+		s++;
+	while (s && *s && ft_isdigit(*s))
+		s++;
+	while (s && *s && ft_isspace(*s))
+		s++;
+	return (s);
+}
 
-	tmp = (char *)str;
-	while (tmp && *tmp && ft_isspace(*tmp))
-		tmp++;
-	tmp2 = ft_strnstr(tmp, target, ft_strlen(target));
-	if (!tmp2)
-		return (NULL);
-	if (ft_strlen(target) > 1)
-	{
-		tmp += 2;
-		while (*tmp && ft_isspace(*tmp))
-			tmp++;
-		tmp = ft_strnstr(tmp, "./", 2);
-		if (tmp && *(tmp + 3) && !ft_isspace(*(tmp + 3)) && *(tmp + 3) != '\n')
-			return (tmp2);
-		else
-			return (NULL);
-	}
-	return (tmp);
+int	combine_rgb(int r, int g, int b)
+{
+	int	ret;
+
+	ret = r;
+	ret = (ret << 8) + g;
+	ret = (ret << 8) + b;
+	return (ret);
 }
 
 int	get_map_width(char **tab)

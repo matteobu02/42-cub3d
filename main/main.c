@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/20 17:17:36 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/22 13:45:49 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ void	parser(int ac, char *path, t_main *data)
 	deep_check_info(data->raw_map, data);
 	find_map(data);
 	check_map(data, data->raw_map);
+	if (data->map->start_posx == -1)
+		close_program(NO_SPAWN_ERROR, data);
+	data->map->height = 0;
 	convert_map(data);
 	data->raw_map = ft_free_tab((void **)data->raw_map);
 	check_map_closed(data->map->map, data);

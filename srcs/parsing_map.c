@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:01:41 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/14 15:28:47 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/22 13:45:46 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,10 @@ void	check_map(t_main *data, char **tab)
 					close_program(MULTIPLE_SPAWN_ERROR, data);
 				data->map->start_posx = vars[1];
 				data->map->start_posy = vars[0];
+				data->map->orientation = tab[vars[0]][vars[1]];
 			}
 		}
 	}
-	if (data->map->start_posx == -1)
-		close_program(NO_SPAWN_ERROR, data);
 }
 
 int	**get_new_map(t_main *data)
@@ -76,10 +75,11 @@ int	**get_new_map(t_main *data)
 	int	i;
 
 	i = -1;
-	data->map->height = 0;
 	while (data->raw_map[++i])
 		if (!check_line(data->raw_map[i], '\n'))
 			data->map->height++;
+	if (i > data->map->height)
+		data->map->start_posy -= (i - data->map->height);
 	ret = (int **)malloc(sizeof(int *) * (data->map->height + 1));
 	if (!ret)
 		close_program(MALLOC_ERROR, data);

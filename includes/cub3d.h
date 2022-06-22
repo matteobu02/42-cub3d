@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/20 17:25:39 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/22 13:55:47 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,7 @@ char	*retrieve_info(char **tab, char const *target, t_main *data);
 void	get_info(t_main *data);
 
 /** CHECK_FILE_INFO.C  **/
+char	*skip_spaces(char const *str, char const *target);
 int		check_line(char const *str, int c);
 void	deep_check_info(char **tab, t_main *data);
 
@@ -176,7 +177,8 @@ void	convert_map(t_main *data);
 void	check_map_closed(int **tab, t_main *data);
 
 /** PARSING_UTILS.C  **/
-char	*skip_spaces(char const *str, char const *target);
+char	*skip_spaces_nums(char *s);
+int		combine_rgb(int r, int g, int b);
 int		get_map_width(char **tab);
 void	fill_with_space(int *tab, int size);
 void	skip_empty_lines(t_main *data, int *index);

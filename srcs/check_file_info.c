@@ -6,11 +6,36 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/13 16:47:25 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/22 13:51:11 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+char	*skip_spaces(char const *str, char const *target)
+{
+	char	*tmp;
+	char	*tmp2;
+
+	tmp = (char *)str;
+	while (tmp && *tmp && ft_isspace(*tmp))
+		tmp++;
+	tmp2 = ft_strnstr(tmp, target, ft_strlen(target));
+	if (!tmp2)
+		return (NULL);
+	if (ft_strlen(target) > 1)
+	{
+		tmp += 2;
+		while (*tmp && ft_isspace(*tmp))
+			tmp++;
+		tmp = ft_strnstr(tmp, "./", 2);
+		if (tmp && *(tmp + 3) && !ft_isspace(*(tmp + 3)) && *(tmp + 3) != '\n')
+			return (tmp2);
+		else
+			return (NULL);
+	}
+	return (tmp);
+}
 
 int	check_line(char const *str, int c)
 {
