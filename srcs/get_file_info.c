@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:48:48 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/22 13:55:04 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/22 16:00:41 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	basic_check_arg(char const *path, t_main *data)
 		close_program(INVALID_ARG_ERROR, data);
 	fd = open(path, O_RDONLY);
 	if (fd < 1 || read(fd, NULL, 0) < 0)
+	{
+		close(fd);
 		close_program(FILE_ERROR, data);
+	}
 	line = get_next_line(fd);
 	i = 0;
 	while (line)
@@ -58,7 +61,7 @@ char	*retrieve_info(char **t, char const *trgt, t_main *data)
 				}
 				return (--tmp);
 			}
-			return (ft_strdup(ft_strchr(t[i], '.')));
+			return (get_path(ft_strchr(t[i], '.')));
 		}
 	}
 	close_program(MISSING_DATA_ERROR, data);
@@ -105,6 +108,10 @@ void	get_info(t_main *data)
 	data->map->ea = retrieve_info(data->raw_map, "EA", data);
 	if (!data->map->no || !data->map->so || !data->map->we || !data->map->ea)
 		close_program(MALLOC_ERROR, data);
+	check_texture(data, data->map->no);
+	check_texture(data, data->map->so);
+	check_texture(data, data->map->we);
+	check_texture(data, data->map->ea);
 	data->map->f = get_rgb(retrieve_info(data->raw_map, "F", data), data);
 	data->map->c = get_rgb(retrieve_info(data->raw_map, "C", data), data);
 	return ;

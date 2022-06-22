@@ -1,7 +1,7 @@
-NO ./rsrc/ananas.xpm
-SO ./rsrc/ricardo.xpm
-EA ./rsrc/sonic.xpm
-WE ./rsrc/coconut.xpm
+NO ./images/disney.xpm
+SO ./images/dreamworks.xpm
+WE ./images/forest.xpm
+EA ./images/pixar.xpm
 F 165,42,42
 C 41,166,166
 

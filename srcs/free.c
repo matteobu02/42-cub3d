@@ -6,7 +6,7 @@
 /*   By: lucasyaiche <lucasyaiche@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:12:08 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/20 03:49:34 by lucasyaiche      ###   ########.fr       */
+/*   Updated: 2022/06/22 16:33:43 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ void	*free_map(t_map *ptr)
 	return (NULL);
 }
 
-int	end(t_data *data)
+int	end(t_data *data, char *msg)
 {
-	mlx_destroy_window(data->mlx, data->win);
-	close_program(NULL, data->main);
+	if (data->win)
+		mlx_destroy_window(data->mlx, data->win);
+	close_program(msg, data->main);
 	exit(0);
 	return (0);
 }

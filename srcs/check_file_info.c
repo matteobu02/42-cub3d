@@ -6,11 +6,12 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/22 13:51:11 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/22 16:05:22 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+#include <string.h>
 
 char	*skip_spaces(char const *str, char const *target)
 {
@@ -104,4 +105,17 @@ void	deep_check_info(char **tab, t_main *data)
 				close_program(DUPLICATED_ENTRY_ERROR, data);
 	}
 	return ;
+}
+
+void	check_texture(t_main *data, char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 1 || read(fd, NULL, 0) < 0)
+	{
+		close(fd);
+		close_program(TEXTURE_ERROR, data);
+	}
+	close(fd);
 }

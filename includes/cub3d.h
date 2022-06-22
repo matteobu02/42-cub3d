@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/22 13:55:47 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/22 16:11:05 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,14 @@
 # define AFTER_PATH_ERROR		"Error\nInvalid data after path"
 # define NO_SPACE_ENTRY_ERROR	"Error\nNeed at least one space after identifier"
 # define IDENTIFIER_PATH_ERROR	"Error\nInvalid data between identifier and path"
+# define TEXTURE_ERROR			"Error\nTexture can't be opened or doesn't exist"
+# define INVALID_TEXTURE_ERROR	"Error\nInvalid texture"
 # define INVALID_MAP_ERROR		"Error\nInvalid map"
 # define MULTIPLE_SPAWN_ERROR	"Error\nMultiple spawn locations found"
 # define SPAWN_ERROR			"Error\nInvalid spawn location"
 # define NO_SPAWN_ERROR			"Error\nNo spawn found"
 # define MAP_OPEN_ERROR			"Error\nMap is not closed"
+# define MLX_ERROR				"Error\nMinilibX failed"
 # define DR 0.0174533
 # define W 1280
 # define H 720
@@ -65,7 +68,7 @@ typedef struct s_minimap
 	int		tile_size;
 	int		p_size;
 	int		color;
-}				t_minimap;
+}	t_minimap;
 
 typedef struct s_img
 {
@@ -77,7 +80,7 @@ typedef struct s_img
 	int				lb;
 	int				endian;
 	struct s_data	*data;
-}				t_img;
+}	t_img;
 
 typedef struct s_raycast
 {
@@ -101,7 +104,7 @@ typedef struct s_raycast
 	float	diry;
 	float	walldist;
 	float	tick;
-}				t_raycast;
+}	t_raycast;
 
 typedef struct s_data
 {
@@ -152,7 +155,8 @@ typedef struct s_data
 	t_img				east;
 	struct s_minimap	minimap;
 	struct s_main		*main;
-}				t_data;
+}	t_data;
+
 typedef struct s_main
 {
 	t_map	*map;
@@ -169,6 +173,7 @@ void	get_info(t_main *data);
 char	*skip_spaces(char const *str, char const *target);
 int		check_line(char const *str, int c);
 void	deep_check_info(char **tab, t_main *data);
+void	check_texture(t_main *data, char *path);
 
 /** PARSING_MAP.C  **/
 void	find_map(t_main *data);
@@ -182,6 +187,9 @@ int		combine_rgb(int r, int g, int b);
 int		get_map_width(char **tab);
 void	fill_with_space(int *tab, int size);
 void	skip_empty_lines(t_main *data, int *index);
+
+/** PARSING_UTILS2.C  **/
+char	*get_path(char *s);
 
 /** LAUNCH.C  **/
 int		launch(t_data *data);
@@ -225,7 +233,7 @@ void	put_pixel(int x, int y, int color, t_data *data);
 int		getpix(int x, int y, t_img *img);
 
 /** FREE.C  **/
-int		end(t_data *data);
+int		end(t_data *data, char *msg);
 void	close_program(char const *msg, t_main *ptr);
 void	*free_map(t_map *ptr);
 

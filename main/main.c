@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/22 13:45:49 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/22 16:11:12 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,27 +32,30 @@ t_map	*init_map_struct(void)
 	return (ret);
 }
 
-void	init_images(t_data *data)
+void	init_images(t_data *data, t_main *main, int width, int height)
 {
-	int	width;
-	int	height;
-
-	width = W;
-	height = H;
-	data->north.img = mlx_xpm_file_to_image(data->mlx, "images/forest.xpm",
+	data->north.img = mlx_xpm_file_to_image(data->mlx, main->map->no,
 			&height, &width);
+	if (!data->north.img)
+		end(data, INVALID_TEXTURE_ERROR);
 	data->north.addr = mlx_get_data_addr(data->north.img, &data->north.bpp,
 			&data->north.lb, &data->north.endian);
-	data->south.img = mlx_xpm_file_to_image(data->mlx, "images/pixar.xpm",
+	data->south.img = mlx_xpm_file_to_image(data->mlx, main->map->so,
 			&height, &width);
+	if (!data->south.img)
+		end(data, INVALID_TEXTURE_ERROR);
 	data->south.addr = mlx_get_data_addr(data->south.img, &data->south.bpp,
 			&data->south.lb, &data->south.endian);
-	data->west.img = mlx_xpm_file_to_image(data->mlx, "images/disney.xpm",
+	data->west.img = mlx_xpm_file_to_image(data->mlx, main->map->we,
 			&height, &width);
+	if (!data->west.img)
+		end(data, INVALID_TEXTURE_ERROR);
 	data->west.addr = mlx_get_data_addr(data->west.img, &data->west.bpp,
 			&data->west.lb, &data->west.endian);
-	data->east.img = mlx_xpm_file_to_image(data->mlx, "images/dreamworks.xpm",
+	data->east.img = mlx_xpm_file_to_image(data->mlx, main->map->ea,
 			&height, &width);
+	if (!data->east.img)
+		end(data, INVALID_TEXTURE_ERROR);
 	data->east.addr = mlx_get_data_addr(data->east.img, &data->east.bpp,
 			&data->east.lb, &data->east.endian);
 }
@@ -60,7 +63,9 @@ void	init_images(t_data *data)
 void	init_value(t_data *data, t_main *main)
 {	
 	data->mlx = mlx_init();
-	init_images(data);
+	if (!data->mlx)
+		close_program(MLX_ERROR, main);
+	init_images(data, main, W, H);
 	data->width = main->map->width;
 	data->height = main->map->height;
 	data->map = main->map->map;
@@ -72,9 +77,15 @@ void	init_value(t_data *data, t_main *main)
 	data->map_data = main->map;
 	data->main = main;
 	data->win = mlx_new_window(data->mlx, W, H, "Cub3d");
+	if (!data->win)
+		close_program(MLX_ERROR, main);
 	data->img = mlx_new_image(data->mlx, W, H);
+	if (!data->img)
+		end(data, MLX_ERROR);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 			&data->line_bytes, &data->endian);
+	if (!data->addr)
+		end(data, MLX_ERROR);
 }
 
 void	parser(int ac, char *path, t_main *data)

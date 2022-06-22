@@ -6,7 +6,7 @@
 #    By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 17:30:02 by lyaiche           #+#    #+#              #
-#    Updated: 2022/06/21 11:52:20 by mbucci           ###   ########.fr        #
+#    Updated: 2022/06/22 16:28:59 by mbucci           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCS_SRC	=	get_file_info.c		\
 				check_file_info.c	\
 				parsing_map.c		\
 				parsing_utils.c		\
+				parsing_utils2.c	\
 				free.c				\
 				degtorad.c   		\
 				fixang.c            \
@@ -45,7 +46,7 @@ COMMONDIR = ./srcs/
 INCLUDES = ./includes/
 LIBFT = ./libft/
 NAME = cub3D
-CFLAGS = -Wall -Wextra -Werror -g ${SANIFLAG} 
+CFLAGS = -Wall -Wextra -Werror -g #${SANIFLAG} 
 SANIFLAG = -fsanitize=address
 MLXFLAG = -lmlx -framework OpenGL -framework AppKit
 

@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 14:45:20 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/15 17:24:01 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/22 15:09:47 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	key_hook_release(int keycode, t_data *data)
 int	key_hook_press(int keycode, t_data *data)
 {
 	if (keycode == 53)
-		end(data);
+		end(data, NULL);
 	if (keycode == 13)
 		data->d = 1;
 	if (keycode == 1)

@@ -1,27 +1,17 @@
-NO ./path_to_the_south_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./images/disney.xpm
+SO ./images/dreamworks.xpm
+WE ./images/forest.xpm
+EA ./images/pixar.xpm
 
 F 220   ,     100   , 0 
 C 225,30,0                  
 
-111111
-111011
-111111
-
-
-
-
-
-
-
-
-
-
-
-
-
-11111
-100E1
-11111
+111
+101   
+101
+11      
+11  1 
+101 
+11N1
+111
+1
