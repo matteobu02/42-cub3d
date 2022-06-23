@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/22 16:11:05 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/23 15:26:55 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ void	check_texture(t_main *data, char *path);
 
 /** PARSING_MAP.C  **/
 void	find_map(t_main *data);
-void	check_map(t_main *data, char **tab);
+void	check_map(t_main *data, int **tab, int width);
 void	convert_map(t_main *data);
 void	check_map_closed(int **tab, t_main *data);
 

@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:01:41 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/22 15:56:29 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/23 15:19:08 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	find_map(t_main *data)
 	int		j;
 
 	i = 0;
-	while (!check_line(data->raw_map[i], '1'))
+	while (data->raw_map[i] && !check_line(data->raw_map[i], '1'))
 		i++;
 	tmp = (char **)malloc(sizeof(char *) * (data->map->height - i + 1));
 	if (!tmp)
@@ -41,29 +41,28 @@ void	find_map(t_main *data)
 	data->map->width = get_map_width(tmp) + 1;
 }
 
-void	check_map(t_main *data, char **tab)
+void	check_map(t_main *data, int **tab, int width)
 {
-	int			vars[3];
-	char const	set[7] = {'1', '0', ' ', 'N', 'S', 'E', 'W'};
+	int	i;
+	int	j;
 
-	vars[0] = -1;
-	while (tab[++vars[0]])
+	i = -1;
+	while (tab[++i])
 	{
-		vars[1] = -1;
-		while (tab[vars[0]][++vars[1]] && tab[vars[0]][vars[1]] != '\n')
+		j = -1;
+		while (++j < width)
 		{
-			vars[2] = 0;
-			while (vars[2] < 7 && set[vars[2]] != tab[vars[0]][vars[1]])
-				vars[2]++;
-			if (vars[2] == 7)
-				close_program(INVALID_MAP_ERROR, data);
-			if (vars[2] > 2)
+			if (tab[i][j] && tab[i][j] != 1 && tab[i][j] != 32)
 			{
+				if (tab[i][j] != 'N' && tab[i][j] != 'S' && tab[i][j] != 'W'
+					&& tab[i][j] != 'E')
+					close_program(INVALID_MAP_ERROR, data);
 				if (data->map->start_posx != -1)
 					close_program(MULTIPLE_SPAWN_ERROR, data);
-				data->map->start_posx = vars[1];
-				data->map->start_posy = vars[0];
-				data->map->orientation = tab[vars[0]][vars[1]];
+				data->map->start_posy = i;
+				data->map->start_posx = j;
+				data->map->orientation = tab[i][j];
+				data->map->map[i][j] = 0;
 			}
 		}
 	}
@@ -121,7 +120,7 @@ void	convert_map(t_main *data)
 			else if (ft_isdigit(data->raw_map[i][j]))
 				data->map->map[x][j] = data->raw_map[i][j] - 48;
 			else
-				data->map->map[x][j] = 0;
+				data->map->map[x][j] = data->raw_map[i][j];
 		}
 		x++;
 	}

@@ -6,7 +6,7 @@
 /*   By: mbucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/19 17:56:17 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/22 16:05:22 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/22 17:18:15 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	deep_check_info(char **tab, t_main *data)
 	int			x;
 
 	i = -1;
-	while (!check_line(tab[++i], '1'))
+	while (tab[++i] && !check_line(tab[i], '1'))
 	{
 		x = -1;
 		while (++x < 6)

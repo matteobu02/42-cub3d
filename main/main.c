@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/22 16:11:12 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/23 15:18:43 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	init_value(t_data *data, t_main *main)
 	data->pdy = -sin(degtorad(data->pa));
 	data->map_data = main->map;
 	data->main = main;
-	data->win = mlx_new_window(data->mlx, W, H, "Cub3d");
+	data->win = mlx_new_window(data->mlx, W, H, "cub3D");
 	if (!data->win)
 		close_program(MLX_ERROR, main);
 	data->img = mlx_new_image(data->mlx, W, H);
@@ -97,12 +97,12 @@ void	parser(int ac, char *path, t_main *data)
 	get_map_info(path, data);
 	deep_check_info(data->raw_map, data);
 	find_map(data);
-	check_map(data, data->raw_map);
-	if (data->map->start_posx == -1)
-		close_program(NO_SPAWN_ERROR, data);
 	data->map->height = 0;
 	convert_map(data);
 	data->raw_map = ft_free_tab((void **)data->raw_map);
+	check_map(data, data->map->map, data->map->width);
+	if (data->map->start_posx == -1)
+		close_program(NO_SPAWN_ERROR, data);
 	check_map_closed(data->map->map, data);
 	return ;
 }
