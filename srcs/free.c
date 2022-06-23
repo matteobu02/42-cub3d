@@ -6,7 +6,7 @@
 /*   By: lucasyaiche <lucasyaiche@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 16:12:08 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/23 15:23:56 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/23 15:31:03 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	close_program(char const *msg, t_main *ptr)
 		if (ptr->map)
 			ptr->map = free_map(ptr->map);
 	}
-	system("leaks cub3D");
 	if (msg)
 	{
 		ft_putendl_fd(msg, STDERR_FILENO);
