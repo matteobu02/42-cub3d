@@ -1,6 +1,6 @@
 NO ./images/disney.xpm
-SO ./images/dreamworks.xpm
-WE ./images/forest.xpm
+SO ./images/disney.xpm
+WE ./images/disney.xpm
 EA ./images/pixar.xpm
 
 F 220,100,0

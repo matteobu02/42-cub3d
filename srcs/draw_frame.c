@@ -6,7 +6,7 @@
 /*   By: lucasyaiche <lucasyaiche@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:54:31 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/20 03:42:08 by lucasyaiche      ###   ########.fr       */
+/*   Updated: 2022/06/23 16:51:47 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ void	draw_frame(t_data *data, t_raycast *raycast)
 			put_pixel(raycast->r, i++, data->main->map->f, data);
 	}
 	if (raycast->side && cos((raycast->ra + 1.5708)) > 0.0)
-		vertline(raycast->r, raycast->side, data, &data->west);
-	else if (raycast->side)
-		vertline(raycast->r, raycast->side, data, &data->east);
-	else if (sin((raycast->ra + 1.5708)) > 0.0)
 		vertline(raycast->r, raycast->side, data, &data->south);
-	else
+	else if (raycast->side)
 		vertline(raycast->r, raycast->side, data, &data->north);
+	else if (sin((raycast->ra + 1.5708)) > 0.0)
+		vertline(raycast->r, raycast->side, data, &data->east);
+	else
+		vertline(raycast->r, raycast->side, data, &data->west);
 }
 
 void	vertline(int x, int side, t_data *data, t_img *img)
