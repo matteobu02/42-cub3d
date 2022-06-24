@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/23 16:51:49 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/24 12:30:47 by mbucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ typedef struct s_data
 	t_img				south;
 	t_img				west;
 	t_img				east;
-	struct s_minimap	minimap;
+	t_minimap			minimap;
 	struct s_main		*main;
 }	t_data;
 
@@ -233,7 +233,7 @@ void	put_pixel(int x, int y, int color, t_data *data);
 int		getpix(int x, int y, t_img *img);
 
 /** FREE.C  **/
-int		end(t_data *data, char *msg);
+int		end(t_data *data, char const *msg);
 void	close_program(char const *msg, t_main *ptr);
 void	*free_map(t_map *ptr);
 

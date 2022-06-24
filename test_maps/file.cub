@@ -1,22 +1,19 @@
-NO ./images/disney.xpm
-SO ./images/dreamworks.xpm
-WE ./images/forest.xpm
-EA ./images/pixar.xpm
+NO ./images/kyle.xpm
+SO ./images/demon.xpm
+WE ./images/cartman.xpm
+EA ./images/kenny.xpm
 
-F 220   ,     100   , 0 
-C 225,30,0                  
-
- 
+F 118,00,0
+C 22,230,70                  
 
 1
 111
-11111
-11N1  111
-1111  111111
+1111
+11N1
+1111 
 
 
 
 
 
-
-111
+1111111111

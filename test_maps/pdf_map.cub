@@ -1,7 +1,7 @@
-NO ./images/disney.xpm
-SO ./images/disney.xpm
-WE ./images/disney.xpm
-EA ./images/pixar.xpm
+NO ./images/kyle.xpm
+SO ./images/demon.xpm
+WE ./images/cartman.xpm
+EA ./images/kenny.xpm
 
 F 220,100,0
 C 225,30,0
