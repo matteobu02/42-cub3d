@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vertline.c                                         :+:      :+:    :+:   */
+/*   draw_frame.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucasyaiche <lucasyaiche@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:54:31 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/23 16:51:47 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/27 00:02:06 by lucasyaiche      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ void	vertline(int x, int side, t_data *data, t_img *img)
 		if (data->draw_start >= 0 && data->draw_start <= (H - 1))
 		{
 			if (side == 0)
-				color = getpix((data->intery - (int)(data->intery)) * (float)W,
+				color = getpix((data->intery - (int)(data->intery)) * 1280.0,
 						((float)data->draw_start - y) / (float)(data->draw_end
-							- y) * (float)H, img);
+							- y) * 720.0, img);
 			else
-				color = getpix((data->interx - (int)(data->interx)) * (float)W,
+				color = getpix((data->interx - (int)(data->interx)) * 1280.0,
 						((float)data->draw_start
-							- y) / (float)(data->draw_end - y) * (float)H, img);
+							- y) / (float)(data->draw_end - y) * 720.0, img);
 			put_pixel(x, data->draw_start, color, data);
 		}
 		data->draw_start++;

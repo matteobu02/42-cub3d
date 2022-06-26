@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+         #
+#    By: lucasyaiche <lucasyaiche@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/11 17:30:02 by lyaiche           #+#    #+#              #
-#    Updated: 2022/06/23 15:24:05 by mbucci           ###   ########.fr        #
+#    Updated: 2022/06/27 00:13:44 by lucasyaiche      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ LIBFT = ./libft/
 NAME = cub3D
 CFLAGS = -Wall -Wextra -Werror -g #${SANIFLAG} 
 SANIFLAG = -fsanitize=address
-MLXFLAG = -lmlx -framework OpenGL -framework AppKit
+MLXFLAG = -lmlx -framework OpenGL -framework AppKit #-I minilibx -L minilibx_macos
 
 #=========#
 #Commandes#
