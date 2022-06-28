@@ -1,7 +1,7 @@
-NO ./images/4k.xpm
-SO ./images/4k.xpm
-WE ./images/2.xpm
-EA ./images/2.xpm
+NO ./images/kenny.xpm
+SO ./images/kyle.xpm
+WE ./images/demon.xpm
+EA ./images/cartman.xpm
 F 165,42,42
 C 41,166,166
 
