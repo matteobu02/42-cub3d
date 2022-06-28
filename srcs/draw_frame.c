@@ -6,11 +6,23 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:54:31 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/28 14:52:05 by lyaiche          ###   ########.fr       */
+/*   Updated: 2022/06/28 17:54:17 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	inversion(t_data *data)
+{
+	if (data->interx < 50)
+		data->interx = 100 - data->interx;
+	else
+		data->interx = data->interx - 50;
+	if (data->intery < 50)
+		data->intery = 100 - data->intery;
+	else
+		data->intery = data->intery - 50;
+}
 
 void	draw_frame(t_data *data, t_raycast *raycast)
 {
@@ -26,13 +38,19 @@ void	draw_frame(t_data *data, t_raycast *raycast)
 			put_pixel(raycast->r, i++, data->main->map->f, data);
 	}
 	if (raycast->side && cos((raycast->ra + 1.5708)) > 0.0)
+	{
+		inversion(data);
 		vertline(raycast->r, raycast->side, data, &data->south);
+	}
 	else if (raycast->side)
 		vertline(raycast->r, raycast->side, data, &data->north);
 	else if (sin((raycast->ra + 1.5708)) > 0.0)
 		vertline(raycast->r, raycast->side, data, &data->east);
 	else
+	{
+		inversion(data);
 		vertline(raycast->r, raycast->side, data, &data->west);
+	}
 }
 
 void	vertline(int x, int side, t_data *data, t_img *img)

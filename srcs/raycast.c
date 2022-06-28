@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucasyaiche <lucasyaiche@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/13 15:50:31 by lyaiche           #+#    #+#             */
-/*   Updated: 2022/06/22 17:31:07 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/28 17:17:54 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ void	init_3d(t_data *data, t_raycast *raycast)
 {
 	data->interx = raycast->raystart_x + (raycast->dirx
 			* raycast->walldist);
-			data->intery = raycast->raystart_y + (raycast->diry
+	data->intery = raycast->raystart_y + (raycast->diry
 			* raycast->walldist);
 	data->draw_start = (float)(H / 2) - ((float)H / (raycast->walldist
 				* (cos((raycast->rpa - raycast->ra)))) / 2.0);
-		data->draw_end = (float)(H / 2) + ((float)H / (raycast->walldist
+	data->draw_end = (float)(H / 2) + ((float)H / (raycast->walldist
 				* (cos((raycast->rpa - raycast->ra)))) / 2.0);
 }
 
