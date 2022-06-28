@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucasyaiche <lucasyaiche@student.42.fr>    +#+  +:+       +#+        */
+/*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 18:31:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/27 00:03:01 by lucasyaiche      ###   ########.fr       */
+/*   Updated: 2022/06/27 19:27:25 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,28 @@ t_map	*init_map_struct(void)
 	return (ret);
 }
 
-void	init_images(t_data *data, t_main *main, int width, int height)
+void	init_images(t_data *data, t_main *main)
 {
 	data->north.img = mlx_xpm_file_to_image(data->mlx, main->map->no,
-			&height, &width);
+			&data->north.width, &data->north.height);
 	if (!data->north.img)
 		end(data, INVALID_TEXTURE_ERROR);
 	data->north.addr = mlx_get_data_addr(data->north.img, &data->north.bpp,
 			&data->north.lb, &data->north.endian);
 	data->south.img = mlx_xpm_file_to_image(data->mlx, main->map->so,
-			&height, &width);
+			&data->south.width, &data->south.height);
 	if (!data->south.img)
 		end(data, INVALID_TEXTURE_ERROR);
 	data->south.addr = mlx_get_data_addr(data->south.img, &data->south.bpp,
 			&data->south.lb, &data->south.endian);
 	data->west.img = mlx_xpm_file_to_image(data->mlx, main->map->we,
-			&height, &width);
+			&data->west.width, &data->west.height);
 	if (!data->west.img)
 		end(data, INVALID_TEXTURE_ERROR);
 	data->west.addr = mlx_get_data_addr(data->west.img, &data->west.bpp,
 			&data->west.lb, &data->west.endian);
 	data->east.img = mlx_xpm_file_to_image(data->mlx, main->map->ea,
-			&height, &width);
+			&data->east.width, &data->east.height);
 	if (!data->east.img)
 		end(data, INVALID_TEXTURE_ERROR);
 	data->east.addr = mlx_get_data_addr(data->east.img, &data->east.bpp,
@@ -65,7 +65,7 @@ void	init_value(t_data *data, t_main *main)
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		close_program(MLX_ERROR, main);
-	init_images(data, main, W, H);
+	init_images(data, main);
 	data->width = main->map->width;
 	data->height = main->map->height;
 	data->map = main->map->map;

@@ -6,7 +6,7 @@
 /*   By: lyaiche <lyaiche@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/12 13:27:24 by mbucci            #+#    #+#             */
-/*   Updated: 2022/06/24 12:30:47 by mbucci           ###   ########.fr       */
+/*   Updated: 2022/06/28 14:51:00 by lyaiche          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ typedef struct s_img
 	int				h;
 	int				bpp;
 	int				lb;
+	int				height;
+	int				width;
 	int				endian;
 	struct s_data	*data;
 }	t_img;
