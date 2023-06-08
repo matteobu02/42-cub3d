@@ -1,87 +1,67 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lucasyaiche <lucasyaiche@student.42.fr>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/05/11 17:30:02 by lyaiche           #+#    #+#              #
-#    Updated: 2022/06/27 00:13:44 by lucasyaiche      ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME		=	cub3D
+CC			=	cc
+CFLAGS		=	-Wall -Wextra -Werror -I ${INCLUDES} -I libft/includes
+SRCDIR		=	./srcs/
+OBJDIR		=	./objs/
+INCLUDES	=	./includes/
+OS			=	$(shell uname)
 
-MAIN_SRC	=	main.c
+ifeq ($(OS), Linux)
+	MLXFLAGS = -lmlx -lm -lX11 -lXext
+else
+	MLXFLAGS = -lmlx -lm -framework AppKit -framework OpenGL
+endif
 
-SRCS_SRC	=	get_file_info.c		\
-				check_file_info.c	\
-				parsing_map.c		\
-				parsing_utils.c		\
-				parsing_utils2.c	\
-				free.c				\
-				degtorad.c   		\
-				fixang.c            \
-				keyhook.c           \
-				moves.c				\
-				launch.c            \
-				draw_map.c          \
-				draw_cube.c         \
-				getpix.c            \
-				put_pixel.c         \
-				raycast.c           \
-				draw_frame.c        \
-				onedirection.c		\
+SRCS	=	main.c				\
+			get_file_info.c		\
+			check_file_info.c	\
+			parsing_map.c		\
+			parsing_utils.c		\
+			parsing_utils2.c	\
+			free.c				\
+			degtorad.c   		\
+			fixang.c            \
+			keyhook.c           \
+			moves.c				\
+			launch.c            \
+			draw_map.c          \
+			draw_cube.c         \
+			getpix.c            \
+			put_pixel.c         \
+			raycast.c           \
+			draw_frame.c        \
+			onedirection.c		\
 				
 				
-SRCS_OBJ	=	${addprefix ${OBJDIR}, ${SRCS_SRC:%.c=%.o}}
+OBJS	=	${addprefix $(OBJDIR), $(SRCS:%.c=%.o)}
 
-MAIN_OBJ	=	${addprefix ${OBJDIR}, ${MAIN_SRC:%.c=%.o}} ${SRCS_OBJ}
 
-#====#
-#Tags#
-#====#
+# ===== #
 
-OBJDIR = ./objs/
-SRCDIR = ./main/
-COMMONDIR = ./srcs/
-INCLUDES = ./includes/
-LIBFT = ./libft/
-NAME = cub3D
-CFLAGS = -Wall -Wextra -Werror -g #${SANIFLAG} 
-SANIFLAG = -fsanitize=address
-MLXFLAG = -lmlx -framework OpenGL -framework AppKit #-I minilibx -L minilibx_macos
 
-#=========#
-#Commandes#
-#=========#					
+all:			$(NAME)
 
-all:							${NAME}
+$(NAME):		$(OBJDIR) $(OBJS)
+				@make -C libft/
+				$(CC) $(CFLAGS) $(OBJS) $(MLXFLAGS) -L libft -lft -o $(NAME)
 
-${OBJDIR}%.o : ${SRCDIR}%.c
-								@gcc ${CFLAGS} -c $< -o $@ -I ${INCLUDES}
-${OBJDIR}%.o : ${CHECKDIR}%.c
-								@gcc ${CFLAGS} -c $< -o $@ -I ${INCLUDES}
-
-${OBJDIR}%.o : ${COMMONDIR}%.c
-								@gcc ${CFLAGS} -c $< -o $@ -I ${INCLUDES}
-
-${NAME}: 						${OBJDIR} ${MAIN_OBJ}
-								@make -C libft
-								@gcc ${CFLAGS} ${MLXFLAG} ${MAIN_OBJ} -L ${LIBFT} -lft -o ${NAME}
-								@printf "\e[32;3m$@ successfully built\e[0m\n"
-
-${OBJDIR}:						
-								@mkdir -p ${OBJDIR}
+bonus:			$(OBJDIR) $(OBJS)
+				# TODO
 
 clean:
-								@rm -rf ${OBJDIR}
-								@make -C ${LIBFT} clean
-								@printf "\e[31;3mClean files\e[0m\n"
+				rm -rf $(OBJDIR)
+				@make -C libft/ clean
 
-fclean:							clean
-								@rm -f ${NAME}
-								@make -C ${LIBFT} fclean
-								@printf "\e[31;3mClean exec\e[0m\n"
+fclean:			
+				@make -C libft/ fclean
+				rm -rf $(NAME) $(OBJDIR)
 
-re:								fclean all
+re:				fclean all
 
-.PHONY:							all clean fclean re
+$(OBJDIR)%.o:	$(SRCDIR)%.c
+				$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR):
+				@mkdir -p $(OBJDIR)
+
+.PHONY:			re clean fclean objs all
